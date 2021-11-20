@@ -29,20 +29,6 @@
       "hidden": false,
       "resizable": true,
       "exitProcessOnClose": true
-    },
-    "browser": {
-      "globalVariables": {
-        "TEST": "Test value browser"
-      },
-      "nativeBlockList": [
-        "filesystem.*"
-      ]
-    },
-    "cloud": {
-      "url": "/dist/#cloud",
-      "nativeAllowList": [
-        "app.*"
-      ]
     }
   },
   "cli": {

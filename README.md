@@ -8,6 +8,10 @@ npm i
 
 ## Development
 To run the application first:
+Install [neu-cli](https://neutralino.js.org/docs/#/tools/cli):
+```sh
+npm i -g @neutralinojs/neu
+```
 
 ```sh
 npm run build
