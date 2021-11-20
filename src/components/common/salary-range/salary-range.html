@@ -1,0 +1,9 @@
+<div class="input-group input-group-sm">
+    <span class="input-group-text">${currencySymbol}</span>
+    <input value.bind="range.start | numberFormat:'0.00'" keydown.trigger="updateValue('start', $event.code)"
+        type="text" class="form-control-sm form-control">
+    <span class="range-divider">-</span>
+    <span class="input-group-text">${currencySymbol}</span>
+    <input value.bind="range.end | numberFormat:'0.00'" keydown.trigger="updateValue('end', $event.code)" type="text"
+        class="form-control-sm form-control">
+</div>

@@ -1,0 +1,53 @@
+<import from="./../common/salary-range/salary-range"></import>
+<import from="./../common/rate-of-pay/rate-of-pay"></import>
+
+<form>
+    <fieldset class="p-2 pt-4">
+        <legend class="pt-0 fieldset-header">Job Details</legend>
+
+        <div class="row mb-2">
+            <label for="profession" class="col-sm-5 col-form-label col-form-label-sm text-muted">Profession</label>
+            <div class="col-sm-7">
+                <select-dropdown value.bind="job.profession" models.bind="jobProfessionOptions" show-search="true">
+                </select-dropdown>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <label for="employmentType" class="col-sm-5 col-form-label col-form-label-sm text-muted">Employment
+                Type</label>
+            <div class="col-sm-7">
+                <select-dropdown value.bind="job.employmentType" models.bind="employmentTypeOptions"></select-dropdown>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <label for="closingDate" class="col-sm-5 col-form-label col-form-label-sm text-muted">Closing
+                Date</label>
+            <div class="col-sm-7">date input</div>
+        </div>
+
+        <div class="mb-2">
+            <label for="salary" class="form-label text-muted">Salary Range</label>
+            <salary-range range.bind="job.salary" id="salary"></salary-range>
+        </div>
+
+        <div class="mb-2">
+            <label for="payRate" class="form-label text-muted">Pay Rate</label>
+            <rate-of-pay rate.bind="job.rate" step.bind="0.01" id="payRate"></rate-of-pay>
+        </div>
+
+
+        <div class="mb-2">
+            <label for="jobUrl" class="form-label text-muted">Website</label>
+            <input value.bind="job.website" type="text" class="form-control form-control-sm" id="jobUrl">
+        </div>
+
+
+        <div class="mb-2">
+            <label for="jobComments" class="form-label text-muted">Notes</label>
+            <textarea value.bind="job.comments" class="form-control form-control-sm" id="jobComments"
+                rows="3"></textarea>
+        </div>
+    </fieldset>
+</form>

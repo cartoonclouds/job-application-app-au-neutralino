@@ -1,0 +1,15 @@
+<import from="./../../actions/actions"></import>
+<import from="./../../company-details/company-details"></import>
+<import from="./../../job-details/job-details"></import>
+
+<div class="row">
+  <div class="col-4 pe-5">
+    <job-details job.bind="jobApplication.job" class="job-application-section"></job-details>
+    <hr>
+    <company-details company.bind="jobApplication.company" class="job-application-section"></company-details>
+  </div>
+
+  <div class="col">
+    <actions actions.bind="jobApplication.actions" class="job-application-section"></actions>
+  </div>
+</div>

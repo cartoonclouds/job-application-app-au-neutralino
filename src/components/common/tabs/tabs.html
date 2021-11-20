@@ -1,0 +1,11 @@
+<import from="./tab/tab"></import>
+
+<ul class="tabs">
+  <tab repeat.for="tab of tabs" id.bind="tab.id" tab-header.bind="tab.tabHeader"></tab>
+
+  <li if.bind="showNewTab" class="tabs__tab tabs__tab_new">
+    <a href="#" click.trigger="emitNewTabRequest()">
+      <span class="ui-icon ui-icon-plusthick tab_new_icon" role="presentation">Add Tab</span>
+    </a>
+  </li>
+</ul>

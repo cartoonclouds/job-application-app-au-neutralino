@@ -1,0 +1,8 @@
+<div class="input-group input-group-sm">
+    <span class="input-group-text">${currencySymbol}</span>
+    <input value.bind="rate.amount | numberFormat:'0.00'" keydown.trigger="updateValue($event.code)" type="text"
+        class="form-control-sm form-control">
+    <span class="input-group-text">${divider}</span>
+
+    <select-dropdown value.bind="rate.unit" models.bind="payRateUnitOptions"></select-dropdown>
+</div>
