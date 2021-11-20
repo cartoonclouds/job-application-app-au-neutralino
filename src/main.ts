@@ -6,6 +6,8 @@ require("jquery");
 require("jquery-ui");
 require("select2");
 require("select2/dist/css/select2.min.css");
+require("bootstrap");
+require("bootstrap/dist/css/bootstrap.css");
 
 // Register common components
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
@@ -35,7 +37,7 @@ Neutralino.events.on("ready", () => {
         { id: "VERSION", text: "Get version" },
         { id: "SEP", text: "-" },
         { id: "QUIT", text: "Quit" },
-      ],  
+      ],
     };
     Neutralino.os.setTray(tray);
   }

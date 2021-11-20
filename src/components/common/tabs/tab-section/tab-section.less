@@ -1,24 +1,25 @@
-/* Tabbed section (individual wrapped container) */
 tab-section {
-  opacity: 0;
-  z-index: -1;
-
-  transition: opacity 0.4s ease;
-  padding: 10px;
-  padding-top: 30px;
-
-  /* position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0; */
-
-  display: none !important;
+  display: block;
 }
 
-tab-section.active {
-  opacity: 1;
-  z-index: 500;
+:global {
+  /* Tabbed section (individual wrapped container) */
+  .tab-sections__tab-section {
+    // display: none !important;
+    opacity: 0;
+    z-index: -1;
+    right: 100%;
+    transition: opacity 0.4s ease;
 
-  display: block !important;
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .tab-sections__tab-section--active {
+    opacity: 1;
+    z-index: 500;
+    right: 0;
+    // display: block !important;
+  }
 }

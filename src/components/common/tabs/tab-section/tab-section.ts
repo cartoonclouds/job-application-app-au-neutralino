@@ -10,7 +10,7 @@ export class TabSection {
 
   attached() {
     if (this.initialSection === this.section) {
-      this.element?.classList.add("active");
+      this.element?.children[0].classList.add("tab-sections__tab-section--active");
     }
   }
 }

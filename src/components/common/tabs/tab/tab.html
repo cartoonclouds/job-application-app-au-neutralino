@@ -1,4 +1,4 @@
-<li class="tabs__tab ${tabHeader.options.initallySelected ? 'tabs__tab--selected selected' : ''}">
+<li class="tabs__tab ${tabHeader.options.initallySelected ? 'tabs__tab--selected ' : ''}">
   <span if.bind="tabHeader.options.closeable" click.trigger="emitCloseTabRequest()"
     class="ui-icon ui-icon-closethick tab_close_icon" role="presentation">Remove Tab</span>
 

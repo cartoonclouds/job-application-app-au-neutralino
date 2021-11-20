@@ -1,36 +1,27 @@
-body {
-    font-size: 14px;
+:global {
+  body {
+    font-size: 14px !important;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
       "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol", "Noto Color Emoji" !important;
+    line-height: 1.2 !important;
   }
-  
-  body * {
-    user-select: none;
-  }
-  
-  body *[selectable],
-  body *.selectable {
-    user-select: text;
-  }
-  
-  /* https://tailwind-elements.com/docs/standard/components/headings/ */
-  /* https://v1.tailwindcss.com/components/navigation */
-  
+
   .au,
+  tabs,
   job-application-tab,
   summary-tab {
     display: block;
   }
-  
+
   .status-bar {
     padding: 10px;
   }
-  
+
   fieldset {
     position: relative;
   }
-  
+
   fieldset legend.fieldset-header {
     top: -0.8em;
     left: 5px;
@@ -42,17 +33,17 @@ body {
     user-select: none;
     border: 1px solid #cecece;
   }
-  
+
   fieldset label {
     text-transform: uppercase;
     margin-bottom: 2px !important;
   }
-  
+
   .form-control:focus {
     box-shadow: none !important;
   }
-  
+
   :focus {
     outline-color: #86b7fe;
   }
-  
+}

@@ -3,13 +3,14 @@
 <import from="./components/common/tabs/tab-section/tab-section"></import>
 
 <!-- Sortable http://jqueryui.com/sortable/ -->
-<main class="container-fluid p-0">
-    <tabs class="nav-tabs" tabs.bind="tabs"></tabs>
-    <!-- <div class="status-bar">status bar</div> -->
-    <tab-sections>
-        <tab-section au-slot repeat.for="tab of tabs"
-            initial-section.one-time="tab.tabHeader.options.initallySelected ? tab.id : ''" section.bind="tab.id"
-            view-model.bind="tab.viewModel" model.bind="tab.model">
-        </tab-section>
-    </tab-sections>
+
+<main class="p-0">
+  <tabs tabs.bind="tabs"></tabs>
+  <!-- <div class="status-bar">status bar</div> -->
+  <tab-sections>
+    <tab-section au-slot repeat.for="tab of tabs"
+      initial-section.one-time="tab.tabHeader.options.initallySelected ? tab.id : ''" section.bind="tab.id"
+      view-model.bind="tab.viewModel" model.bind="tab.model">
+    </tab-section>
+  </tab-sections>
 </main>

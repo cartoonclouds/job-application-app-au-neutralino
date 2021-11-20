@@ -16,8 +16,8 @@
   "modes": {
     "window": {
       "title": "test-app",
-      "width": 800,
-      "height": 500,
+      "width": 1300,
+      "height": 860,
       "minWidth": 400,
       "minHeight": 200,
       "fullScreen": false,
