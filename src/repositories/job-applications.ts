@@ -11,7 +11,7 @@ import { CompaniesRepository } from "./companies";
  * Repository to perform bulk actions on job applications.
  */
 export class JobApplicationRepository extends RepositoryBase {
-  private static jobApplicationList = [
+  public static jobApplicationList = [
     new JobApplication({
       job: new Job({
         profession: JobProfession.IT_PROFESSIONAL,
@@ -30,26 +30,27 @@ export class JobApplicationRepository extends RepositoryBase {
         }),
       }),
       company: CompaniesRepository.companies()[0],
+      requiresFollowup: true,
     }),
   ];
 
-  public static jobApplications() {
-    return this.jobApplicationList;
+  public jobApplications() {
+    return JobApplicationRepository.jobApplicationList;
   }
 
-  public static jobApplication(id: string) {
-    return this.jobApplicationList.find((j) => j.id === id);
+  public jobApplication(id: string) {
+    return JobApplicationRepository.jobApplicationList.find((j) => j.id === id);
   }
 
-  public static jobApplicationCount(): number {
-    return this.jobApplicationList.length;
+  public get jobApplicationCount(): number {
+    return JobApplicationRepository.jobApplicationList.length;
   }
 
   /**
    * Returns an array of job applications which have been set as requiring follow-up.
    */
   public getApplicationsRequiringFollowup(): JobApplication[] {
-    return JobApplicationRepository.jobApplications().filter(
+    return JobApplicationRepository.jobApplicationList.filter(
       (application: JobApplication) => application.requiresFollowup
     );
   }

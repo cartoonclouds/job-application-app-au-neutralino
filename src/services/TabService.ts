@@ -43,12 +43,11 @@ export class TabService {
       new TabContent({
         viewModel: JobApplicationTab,
         model: {
-          jobApplication: JobApplicationRepository.jobApplications()[0],
+          jobApplication: JobApplicationRepository.jobApplicationList[0],
         },
       })
     ),
   ];
-
 
   public removeTab(tabId: string) {
     const tabIdx = TabService.tabList.findIndex(
