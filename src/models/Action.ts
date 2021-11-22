@@ -16,6 +16,7 @@ export class Action extends Model<Action> {
   public parentAction?: Action;
   public contactPerson?: Person;
   public comments?: string;
+  public requiresFollowup: boolean = false;
   public contactMethod?: ContactMethod;
 
   constructor(attributes?: Partial<Action>) {

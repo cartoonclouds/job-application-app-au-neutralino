@@ -1,16 +1,8 @@
-import { bindable } from "aurelia";
+import { bindable, BindingMode } from "aurelia";
 
 export class TabSection {
-  @bindable section!: string;
+  @bindable section: string;
   @bindable viewModel: any;
   @bindable model: any;
-  @bindable initialSection?: string;
-
-  constructor(private readonly element: Element) {}
-
-  attached() {
-    if (this.initialSection === this.section) {
-      this.element?.children[0].classList.add("tab-sections__tab-section--active");
-    }
-  }
+  @bindable({ mode: BindingMode.twoWay }) selected: boolean = false;
 }

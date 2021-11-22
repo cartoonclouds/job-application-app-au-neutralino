@@ -9,7 +9,7 @@
   <!-- <div class="status-bar">status bar</div> -->
   <tab-sections>
     <tab-section au-slot repeat.for="tab of tabs"
-      initial-section.one-time="tab.tabHeader.options.initallySelected ? tab.id : ''" section.bind="tab.id"
+      selected.bind="tab.selected" section.bind="tab.id"
       view-model.bind="tab.viewModel" model.bind="tab.model">
     </tab-section>
   </tab-sections>

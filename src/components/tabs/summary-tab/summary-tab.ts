@@ -1,7 +1,6 @@
+import { JobApplicationRepository } from '../../../repositories/job-applications';
 export class SummaryTab {
-  message: string;
 
-  constructor() {
-    this.message = ' works!';
+  constructor(public readonly applicationRepository: JobApplicationRepository) {
   }
 }

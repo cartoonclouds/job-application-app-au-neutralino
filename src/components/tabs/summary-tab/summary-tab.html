@@ -1,9 +1,35 @@
-<h1>SummaryTab ${message}</h1>
-<div class="row">
+<div class="row row-cols-2 g-4">
 
+  <div class="col">
+    <div class="card h-100">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <i class="fas fa-angle-up"></i>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Job Application Count</h5>
+            <p class="card-text">${applicationRepository.jobApplicationCount()}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div>
-
-<div class="row">
+  <div class="col">
+    <div class="card h-100">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <i class="fas fa-cube img-fluid rounded-start"></i>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Job Applications Requiring Follow-up</h5>
+            <p class="card-text">${applicationRepository.getApplicationsRequiringFollowup()}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

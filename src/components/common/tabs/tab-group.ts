@@ -1,3 +1,4 @@
+import { observable } from "@aurelia/runtime";
 interface ITabHeaderOptions {
   label: string;
   tooltip?: string;
@@ -24,6 +25,8 @@ export class TabContent {
 }
 
 export class TabGroup {
+  public selected: boolean = false;
+
   constructor(
     public readonly id: string,
     public tabHeader: TabHeader,

@@ -1,4 +1,12 @@
 :global {
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap");
+
+  // @fa-font-path: "/assets/webfonts/";
+
+  * {
+    position: relative;
+  }
+
   body {
     font-size: 14px !important;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
@@ -20,23 +28,23 @@
 
   fieldset {
     position: relative;
-  }
 
-  fieldset legend.fieldset-header {
-    top: -0.8em;
-    left: 5px;
-    position: absolute;
-    font-size: 1em;
-    background-color: #fff;
-    padding: 2px 10px;
-    width: auto;
-    user-select: none;
-    border: 1px solid #cecece;
-  }
+    legend.fieldset-header {
+      top: -0.8em;
+      left: 5px;
+      position: absolute;
+      font-size: 1em;
+      background-color: #fff;
+      padding: 2px 10px;
+      width: auto;
+      user-select: none;
+      border: 1px solid #cecece;
+    }
 
-  fieldset label {
-    text-transform: uppercase;
-    margin-bottom: 2px !important;
+    label {
+      text-transform: uppercase;
+      margin-bottom: 2px !important;
+    }
   }
 
   .form-control:focus {

@@ -1,6 +1,6 @@
-<li class="tabs__tab ${tabHeader.options.initallySelected ? 'tabs__tab--selected ' : ''}">
-  <span if.bind="tabHeader.options.closeable" click.trigger="emitCloseTabRequest()"
-    class="ui-icon ui-icon-closethick tab_close_icon" role="presentation">Remove Tab</span>
+<li class="tabs__tab ${selected ? 'tabs__tab--selected' : ''}" click.trigger="showTab()">
+  <button if.bind="tabHeader.options.closeable" click.trigger="closeTab()" type="button"
+    class="btn-close text-danger tab_close_icon" aria-label="Close"></button>
 
   <a href="#${id}" class="tabs__tab__inner">
     ${tabHeader.options.label}

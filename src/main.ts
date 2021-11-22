@@ -9,13 +9,17 @@ require("select2/dist/css/select2.min.css");
 require("bootstrap");
 require("bootstrap/dist/css/bootstrap.css");
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 // Register common components
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
 
 // Register Value Converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
 
-const app = Aurelia.register(SelectDropdown, NumberFormatValueConverter).app(App);
+const app = Aurelia.register(SelectDropdown, NumberFormatValueConverter).app(
+  App
+);
 
 // Initialize native API communication. This is non-blocking
 // use 'ready' event to run code on app load.
@@ -27,7 +31,8 @@ Neutralino.events.on("ready", () => {
     // TODO: Fix https://github.com/neutralinojs/neutralinojs/issues/615
     // Set tray handling
     // @ts-ignore
-    if (NL_MODE != "window") {0
+    if (NL_MODE != "window") {
+      0;
       console.log("INFO: Tray menu is only available in the window mode.");
       return;
     }

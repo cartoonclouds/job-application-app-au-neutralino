@@ -1,11 +1,11 @@
 import { RepositoryBase } from "./repository-base";
-import { JobApplication } from '../models/JobApplication';
-import { JobProfession } from '../enums/job-profession';
-import moment from 'moment';
-import { EmploymentType } from '../enums/employment-type';
-import { Job } from '../models/Job';
-import { Address } from '../models/Address';
-import { CompaniesRepository } from './companies';
+import { JobApplication } from "../models/JobApplication";
+import { JobProfession } from "../enums/job-profession";
+import moment from "moment";
+import { EmploymentType } from "../enums/employment-type";
+import { Job } from "../models/Job";
+import { Address } from "../models/Address";
+import { CompaniesRepository } from "./companies";
 
 /**
  * Repository to perform bulk actions on job applications.
@@ -29,8 +29,8 @@ export class JobApplicationRepository extends RepositoryBase {
           country: "Australia",
         }),
       }),
-      company: CompaniesRepository.companies()[0]
-    })
+      company: CompaniesRepository.companies()[0],
+    }),
   ];
 
   public static jobApplications() {
@@ -38,13 +38,21 @@ export class JobApplicationRepository extends RepositoryBase {
   }
 
   public static jobApplication(id: string) {
-    return this.jobApplicationList.find(j => j.id === id);
+    return this.jobApplicationList.find((j) => j.id === id);
   }
 
   public static jobApplicationCount(): number {
     return this.jobApplicationList.length;
   }
 
+  /**
+   * Returns an array of job applications which have been set as requiring follow-up.
+   */
+  public getApplicationsRequiringFollowup(): JobApplication[] {
+    return JobApplicationRepository.jobApplications().filter(
+      (application: JobApplication) => application.requiresFollowup
+    );
+  }
   // By:
   // * salary range
   // * rate
@@ -54,5 +62,4 @@ export class JobApplicationRepository extends RepositoryBase {
   // * created date
   // * company
   // * location (ie, Address suburb, state, postcode, country)
-  // * an action which requires follow-up (requiresFollowup)
 }

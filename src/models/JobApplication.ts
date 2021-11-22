@@ -14,6 +14,7 @@ import { modelSchema } from "../decorators/model-schema";
 })
 export class JobApplication extends Model<JobApplication> {
   public job: Job;
+  public requiresFollowup: boolean = false;
   public company: Company;
   public actions?: Action[];
 

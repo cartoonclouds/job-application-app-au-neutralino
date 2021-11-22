@@ -1,16 +1,20 @@
 import { bindable, BindingMode, containerless, EventAggregator } from "aurelia";
 import { TabHeader } from "../tab-group";
+import { TabService } from "../../../../services/TabService";
 
 @containerless
 export class Tab {
-  @bindable({ mode: BindingMode.oneTime }) id: string = "";
-  @bindable({ mode: BindingMode.oneTime }) tabHeader?: TabHeader;
+  @bindable({ mode: BindingMode.oneTime }) id: string;
+  @bindable({ mode: BindingMode.twoWay }) selected: boolean = false;
+  @bindable({ mode: BindingMode.twoWay }) tabHeader: TabHeader;
 
-  constructor(private readonly eventAggregator: EventAggregator) {}
+  constructor(private readonly tabService: TabService) {}
 
-  public emitCloseTabRequest() {
-    this.eventAggregator.publish(`tab.close-request`, {
-      tab_id: this.id,
-    });
+  public showTab() {
+    this.tabService.openTab(this.id);
+  }
+
+  public closeTab() {
+    this.tabService.removeTab(this.id);
   }
 }

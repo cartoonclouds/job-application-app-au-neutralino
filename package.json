@@ -12,6 +12,7 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "aurelia": "dev",
     "bootstrap": "^5.1.3",
     "jquery": "^3.6.0",
@@ -43,6 +44,7 @@
     "del": "^6.0.0",
     "eslint": "^7.18.0",
     "gulp": "^4.0.2",
+    "gulp-changed-in-place": "^2.3.0",
     "gulp-dumber": "^1.0.3",
     "gulp-dumber-css-module": "^0.1.1",
     "gulp-if": "^3.0.0",

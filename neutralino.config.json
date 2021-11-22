@@ -15,9 +15,9 @@
   },
   "modes": {
     "window": {
-      "title": "test-app",
+      "title": "Job Application App",
       "width": 1300,
-      "height": 860,
+      "height": 870,
       "minWidth": 400,
       "minHeight": 200,
       "fullScreen": false,
