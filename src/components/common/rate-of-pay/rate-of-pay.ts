@@ -1,6 +1,6 @@
 import { bindable, BindingMode } from "aurelia";
 import { NavigationKeys } from "../../../custom_typings/keyboard-keys";
-import { PayRateUnit } from "../../../enums/pay-rate-unit";
+import { PayRateUnitEnum } from "../../../enums/pay-rate-unit";
 
 export class RateOfPay {
   @bindable({ mode: BindingMode.twoWay }) public rate: PayRate;
@@ -25,7 +25,7 @@ export class RateOfPay {
     if (!this.rate) {
       this.rate = {
         amount: 0.0,
-        unit: PayRateUnit.HOUR,
+        unit: PayRateUnitEnum.HOUR,
       };
     }
 
@@ -37,6 +37,6 @@ export class RateOfPay {
   }
 
   public get payRateUnitOptions() {
-    return Object.values(PayRateUnit);
+    return Object.values(PayRateUnitEnum);
   }
 }

@@ -1,8 +1,10 @@
+import { inject } from "aurelia";
 import { RepositoryBase } from "./repository-base";
 
 /**
  * Repository to perform bulk actions on addresses.
  */
+ @inject()
 export class AddressRepository extends RepositoryBase {
   public static addresses() {
     //TODO find all addresses attached to Company, Job, Person, User

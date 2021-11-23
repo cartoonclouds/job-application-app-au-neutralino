@@ -1,38 +1,30 @@
 import { RepositoryBase } from "./repository-base";
 import { Company } from "../models/Company";
+import { SeederService } from "../services/SeederService";
+import { inject } from "aurelia";
 
 /**
  * Repository to perform bulk actions on companies.
  */
+ @inject()
 export class CompanyRepository extends RepositoryBase {
-  public static companiesList = [
-    new Company({
-      name: "Big Burgers",
-    }),
-    new Company({
-      name: "Chairs 'r Us",
-    }),
-    new Company({
-      name: "Blankets Galour",
-    }),
-    new Company({
-      name: "Chris, Chris and Chris",
-      email: "chris@company.com",
-      phone: "0401 943 694",
-      url: "www.companyname.com",
-      comments: "This is a really great company!",
-    }),
-  ];
+  public companiesList = [];
+
+  constructor(public readonly seederService: SeederService) {
+    super();
+
+    this.companiesList = seederService.companies;
+  }
 
   public companies() {
-    return CompanyRepository.companiesList;
+    return this.companiesList;
   }
 
   public company(id: string) {
-    return CompanyRepository.companiesList.find((c) => c.id === id);
+    return this.companiesList.find((c) => c.id === id);
   }
 
   public get companyCount(): number {
-    return CompanyRepository.companiesList.length;
+    return this.companiesList.length;
   }
 }

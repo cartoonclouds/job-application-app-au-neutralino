@@ -1,8 +1,8 @@
 import moment from "moment";
 import { Model } from "./Model";
 import { Address } from "./Address";
-import { EmploymentType } from "../enums/employment-type";
-import { JobProfession } from "../enums/job-profession";
+import { EmploymentTypeEnum } from "../enums/employment-type";
+import { JobProfessionEnum } from "../enums/job-profession";
 import { modelSchema } from "../decorators/model-schema";
 
 /**
@@ -27,8 +27,8 @@ export class Job extends Model<Job> {
   public closingDate?: moment.Moment;
   public salary?: NumberRange;
   public rate?: PayRate;
-  public profession?: JobProfession; // programmer, clerk, librarian JobProfession
-  public employmentType?: EmploymentType;
+  public profession?: JobProfessionEnum; // programmer, clerk, librarian JobProfession
+  public employmentType?: EmploymentTypeEnum;
   public address?: Address;
 
   constructor(attributes?: Partial<Job>) {

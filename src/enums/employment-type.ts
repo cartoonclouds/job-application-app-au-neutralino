@@ -1,4 +1,4 @@
-export enum EmploymentType {
+export enum EmploymentTypeEnum {
   FULLTIME = "Full-time",
   PARTTIME = "Part-time",
   CASUAL = "Casual",
@@ -9,3 +9,6 @@ export enum EmploymentType {
   TRAINEE = "Apprentice/Trainee",
   OUTWORKER = "Outworker",
 }
+
+export const EmploymentTypeEnumCount: number =
+  Object.keys(EmploymentTypeEnum).length;

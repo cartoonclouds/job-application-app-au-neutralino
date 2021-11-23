@@ -1,6 +1,7 @@
-import { JobApplicationRepository } from "../../../repositories/job-application";
 import { ActionRepository } from "../../../repositories/action";
-import { CompanyRepository } from '../../../repositories/company';
+import { CompanyRepository } from "../../../repositories/company";
+import { JobApplicationRepository } from "../../../repositories/job-application";
+
 export class SummaryTab {
   constructor(
     public readonly applicationRepository: JobApplicationRepository,
@@ -9,6 +10,7 @@ export class SummaryTab {
   ) {}
 
   public get applicationsRequiringFollowup(): number {
+    console.log(this.applicationRepository.getApplicationsRequiringFollowup());
     return this.applicationRepository.getApplicationsRequiringFollowup().length;
   }
 

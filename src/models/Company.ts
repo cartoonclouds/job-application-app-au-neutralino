@@ -1,5 +1,7 @@
 import { Model } from "./Model";
 import { modelSchema } from "../decorators/model-schema";
+import { Address } from './Address';
+import { Person } from './Person';
 /**
  * Company Model
  */
@@ -9,6 +11,8 @@ import { modelSchema } from "../decorators/model-schema";
   phone: "string",
   url: "string",
   comments: "string",
+  address: "Address",
+  contactPeople: "Person[]",
 })
 export class Company extends Model<Company> {
   public name?: string;
@@ -16,6 +20,8 @@ export class Company extends Model<Company> {
   public phone?: string;
   public url?: string;
   public comments?: string;
+  public address: Address;
+  public contactPeople?: Person[];
 
   constructor(attributes?: Partial<Company>) {
     super(attributes);

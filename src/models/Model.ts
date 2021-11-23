@@ -1,15 +1,7 @@
 import moment from "moment";
 import _ from "underscore";
-import { InMemoryStorage } from "../services/storage/in-memory-service";
 import { UUIDService } from "../services/UUIDService";
-import { ArrayUtility } from "../utilities/array-utility";
-import { Utility } from "../utilities/common";
-import { ObjectUtility } from "../utilities/object-utility";
-import { SalaryRange } from "../components/common/salary-range/salary-range";
 import { getModelSchema } from "../decorators/model-schema";
-import { JobProfession } from "../enums/job-profession";
-import { Address } from "./Address";
-import { isObject } from "util";
 import { PrimitiveTypesSerializations } from "./ModelPrimitiveCasts";
 
 // https://stackoverflow.com/questions/14142071/typescript-and-field-initializers
@@ -18,8 +10,6 @@ import { PrimitiveTypesSerializations } from "./ModelPrimitiveCasts";
 // https://stackoverflow.com/questions/44196462/typescript-abstract-static
 
 export abstract class Model<T> {
-  protected static readonly storage = new InMemoryStorage();
-
   public static modelTypes = new Map<string, any>();
 
   constructor(attributes = {}) {
@@ -50,8 +40,8 @@ export abstract class Model<T> {
 
     const serializedModelString = Model.toJson(serializedModel);
 
-    serializedModelString &&
-      Model.storage.setItem(this.id, serializedModelString);
+    // serializedModelString &&
+    // Model.storage.setItem(this.id, serializedModelString);
 
     return this.id;
   }
@@ -63,7 +53,7 @@ export abstract class Model<T> {
    * @returns a new instance of the model found
    */
   public static find<M>(id: string): M | void {
-    const serializedModelString = Model.storage.getItem(id);
+    const serializedModelString = null; //Model.storage.getItem(id);
 
     if (serializedModelString === undefined) {
       return undefined;

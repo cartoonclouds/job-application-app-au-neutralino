@@ -1,53 +1,60 @@
+import { inject } from "aurelia";
+
+import { ApplicationSummary } from "../components/application-summary/application-summary";
 import {
+  TabContent,
   TabGroup,
   TabHeader,
-  TabContent,
 } from "../components/common/tabs/tab-group";
-import { SummaryTab } from "../components/tabs/summary-tab/summary-tab";
 import { JobApplicationTab } from "../components/tabs/job-application-tab/job-application-tab";
-import { ApplicationSummary } from "../components/application-summary/application-summary";
-import { UUIDService } from "../services/UUIDService";
+import { SummaryTab } from "../components/tabs/summary-tab/summary-tab";
 import { JobApplicationRepository } from "../repositories/job-application";
-import { inject } from "aurelia";
+import { UUIDService } from "../services/UUIDService";
 
 /**
  * Service to control tabs and tab section visibility.
  */
 @inject()
 export class TabService {
-  public static tabList = [
-    new TabGroup(
-      UUIDService.generate(),
-      new TabHeader({
-        label: "Summary",
-        tooltip: "Tooltip for tab 1",
-        disabled: false,
-        closeable: false,
-        moveable: false,
-      }),
-      new TabContent({
-        viewModel: SummaryTab,
-        model: {
-          message2:
-            "Nunc tincidunt! Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.",
-        },
-      })
-    ),
+  public static tabList = [];
 
-    new TabGroup(
-      UUIDService.generate(),
-      new TabHeader({
-        label: "New Job Application",
-        tooltip: "Tooltip for tab 2",
-      }),
-      new TabContent({
-        viewModel: JobApplicationTab,
-        model: {
-          jobApplication: JobApplicationRepository.jobApplicationList[0],
-        },
-      })
-    ),
-  ];
+  constructor(
+    public readonly jobApplicationRepository: JobApplicationRepository
+  ) {
+    TabService.tabList = [
+      new TabGroup(
+        UUIDService.generate(),
+        new TabHeader({
+          label: "Summary",
+          tooltip: "Tooltip for tab 1",
+          disabled: false,
+          closeable: false,
+          moveable: false,
+        }),
+        new TabContent({
+          viewModel: SummaryTab,
+          model: {
+            message2:
+              "Nunc tincidunt! Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.",
+          },
+        })
+      ),
+
+      new TabGroup(
+        UUIDService.generate(),
+        new TabHeader({
+          label: "New Job Application",
+          tooltip: "Tooltip for tab 2",
+        }),
+        new TabContent({
+          viewModel: JobApplicationTab,
+          model: {
+            jobApplication: jobApplicationRepository.jobApplications()[0],
+          },
+        })
+      ),
+    ];
+  }
 
   public removeTab(tabId: string) {
     const tabIdx = TabService.tabList.findIndex(

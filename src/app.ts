@@ -8,12 +8,16 @@ import {
   Person,
   User,
 } from "./models";
+import { SeederService } from "./services/SeederService";
 import { TabService } from "./services/TabService";
 
 export class App {
   public tabs = TabService.tabs();
 
-  constructor(private readonly tabService: TabService) {
+  constructor(
+    private readonly tabService: TabService,
+    public readonly seederService: SeederService
+  ) {
     Model.modelTypes.set("action", Action);
     Model.modelTypes.set("address", Address);
     Model.modelTypes.set("company", Company);
@@ -31,6 +35,7 @@ export class App {
     // console.log(Job.className, job.instanceName);
 
     // console.log(job.id, job.rate);
+    console.log(seederService.applications);
   }
 
   attached() {

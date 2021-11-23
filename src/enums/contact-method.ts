@@ -1,4 +1,4 @@
-export enum ContactMethod {
+export enum ContactMethodEnum {
   PHONE_CALL = "Phone call",
   RECEIVED_PHONE_CALL = "Received phone call",
   EMAIL = "E-mail",
@@ -9,3 +9,5 @@ export enum ContactMethod {
   LETTER = "Letter",
   FORUM = "Online forum",
 }
+
+export const ContactMethodEnumCount: number = Object.keys(ContactMethodEnum).length;

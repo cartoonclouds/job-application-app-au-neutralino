@@ -1,4 +1,4 @@
-export enum PayRateUnit {
+export enum PayRateUnitEnum {
   HOUR = "hour",
   DAY = "day",
   WEEK = "week",
@@ -6,3 +6,5 @@ export enum PayRateUnit {
   MONTH = "month",
   YEAR = "year",
 }
+
+export const PayRateUnitEnumCount: number = Object.keys(PayRateUnitEnum).length;

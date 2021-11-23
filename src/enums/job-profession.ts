@@ -1,4 +1,4 @@
-export enum JobProfession {
+export enum JobProfessionEnum {
   ADULT_INDUSTRY_WORKER = "Adult industry worker",
   AGRICULTURAL_WORKER = "Agricultural worker",
   APPRENTICE = "Apprentice",
@@ -41,3 +41,5 @@ export enum JobProfession {
   TRAVEL_AGENT_EMPLOYEE = "Travel agent employee",
   TRUCK_DRIVER = "Truck driver",
 }
+
+export const JobProfessionEnumCount: number = Object.keys(JobProfessionEnum).length;

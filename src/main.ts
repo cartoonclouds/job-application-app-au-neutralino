@@ -1,25 +1,38 @@
-import Aurelia from "aurelia";
-import { App } from "./app";
 
 // Register plugins
-require("jquery");
-require("jquery-ui");
-require("select2");
-require("select2/dist/css/select2.min.css");
-require("bootstrap");
-require("bootstrap/dist/css/bootstrap.css");
+import "bootstrap/dist/css/bootstrap.css";
+import "select2/dist/css/select2.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "bootstrap";
+import "jquery";
+import "jquery-ui";
+import "select2";
+
+import Aurelia, { DI, Registration, IContainer, IResolver } from "aurelia";
+import { App } from "./app";
+
 
 // Register common components
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
 
-// Register Value Converters
+// Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
 
-const app = Aurelia.register(SelectDropdown, NumberFormatValueConverter).app(
-  App
-);
+// Register custom attributes
+import { EllipsisCustomAttribute } from "./resources/custom-attributes/ellipsis";
+
+// Register services
+import { SeederService } from "./services/SeederService";
+
+const app = Aurelia.register(
+  SelectDropdown,
+  NumberFormatValueConverter,
+  EllipsisCustomAttribute
+).app(App);
+
+const container = DI.createContainer();
+container.register(Registration.singleton("SeederService", SeederService));
 
 // Initialize native API communication. This is non-blocking
 // use 'ready' event to run code on app load.

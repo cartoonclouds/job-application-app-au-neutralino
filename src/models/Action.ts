@@ -1,4 +1,4 @@
-import { ContactMethod } from "../enums/contact-method";
+import { ContactMethodEnum } from "../enums/contact-method";
 import { Person } from "./Person";
 import { Model } from "./Model";
 import { modelSchema } from "../decorators/model-schema";
@@ -11,13 +11,14 @@ import { modelSchema } from "../decorators/model-schema";
   contactPerson: "Person",
   comments: "string",
   contactMethod: "ContactMethod",
+  requiresFollowup: "boolean"
 })
 export class Action extends Model<Action> {
   public parentAction?: Action;
   public contactPerson?: Person;
   public comments?: string;
-  public requiresFollowup: boolean = false;
-  public contactMethod?: ContactMethod;
+  public requiresFollowup?: boolean;
+  public contactMethod?: ContactMethodEnum;
 
   constructor(attributes?: Partial<Action>) {
     super(attributes);

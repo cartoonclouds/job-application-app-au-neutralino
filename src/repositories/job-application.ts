@@ -1,56 +1,38 @@
 import { RepositoryBase } from "./repository-base";
 import { JobApplication } from "../models/JobApplication";
-import { JobProfession } from "../enums/job-profession";
-import moment from "moment";
-import { EmploymentType } from "../enums/employment-type";
-import { Job } from "../models/Job";
-import { Address } from "../models/Address";
-import { CompanyRepository } from './company';
+import { SeederService } from "../services/SeederService";
+import { inject } from "aurelia";
 
 /**
  * Repository to perform bulk actions on job applications.
  */
+@inject()
 export class JobApplicationRepository extends RepositoryBase {
-  public static jobApplicationList = [
-    new JobApplication({
-      job: new Job({
-        profession: JobProfession.IT_PROFESSIONAL,
-        employmentType: EmploymentType.FULLTIME,
-        closingDate: moment().add(6, "months"),
-        salary: { start: 1, end: 90000 },
-        rate: { amount: 11.11, unit: "day" },
-        url: "www.jobwebsite.com",
-        comments: "Comments about this job",
-        address: new Address({
-          address_line_1: "U9 2/3 Birchmore Close",
-          suburb: "Plmpton",
-          state: "SA",
-          postcode: 5040,
-          country: "Australia",
-        }),
-      }),
-      company: CompanyRepository.companiesList[0],
-      requiresFollowup: true,
-    }),
-  ];
+  public jobApplicationList: JobApplication[] = [];
+
+  constructor(public readonly seederService: SeederService) {
+    super();
+
+    this.jobApplicationList = seederService.applications;
+  }
 
   public jobApplications() {
-    return JobApplicationRepository.jobApplicationList;
+    return this.jobApplicationList;
   }
 
   public jobApplication(id: string) {
-    return JobApplicationRepository.jobApplicationList.find((j) => j.id === id);
+    return this.jobApplicationList.find((j) => j.id === id);
   }
 
   public get jobApplicationCount(): number {
-    return JobApplicationRepository.jobApplicationList.length;
+    return this.jobApplicationList.length;
   }
 
   /**
    * Returns an array of job applications which have been set as requiring follow-up.
    */
   public getApplicationsRequiringFollowup(): JobApplication[] {
-    return JobApplicationRepository.jobApplicationList.filter(
+    return this.jobApplicationList.filter(
       (application: JobApplication) => application.requiresFollowup
     );
   }
