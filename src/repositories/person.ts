@@ -1,11 +1,11 @@
 import { RepositoryBase } from "./repository-base";
-import { Person } from '../models/Person';
-import { Address } from '../models/Address';
+import { Person } from "../models/Person";
+import { Address } from "../models/Address";
 
 /**
  * Repository to perform bulk actions on companies.
  */
-export class PeopleRepository extends RepositoryBase {
+export class PersonRepository extends RepositoryBase {
   private static peopleList = [
     new Person({
       name: "Bob Smith",
@@ -16,7 +16,7 @@ export class PeopleRepository extends RepositoryBase {
         state: "WA",
         postcode: 6501,
         country: "Australia",
-      })
+      }),
     }),
     new Person({
       name: "Jane Wonder",
@@ -27,7 +27,7 @@ export class PeopleRepository extends RepositoryBase {
         state: "VIC",
         postcode: 2657,
         country: "Australia",
-      })
+      }),
     }),
     new Person({
       name: "Jake Black",
@@ -38,15 +38,19 @@ export class PeopleRepository extends RepositoryBase {
         state: "SA",
         postcode: 5000,
         country: "Australia",
-      })
-    })
+      }),
+    }),
   ];
 
-  public static people(id?: string) {
-    return id ? this.peopleList.find(c => c.id === id) : this.peopleList;
+  public people() {
+    return PersonRepository.peopleList;
   }
 
-  public static peopleCount(): number {
-    return this.peopleList.length;
+  public person(id: string) {
+    return PersonRepository.peopleList.find((p) => p.id === id);
+  }
+
+  public get personCount(): number {
+    return PersonRepository.peopleList.length;
   }
 }

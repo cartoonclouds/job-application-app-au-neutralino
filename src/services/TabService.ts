@@ -7,7 +7,7 @@ import { SummaryTab } from "../components/tabs/summary-tab/summary-tab";
 import { JobApplicationTab } from "../components/tabs/job-application-tab/job-application-tab";
 import { ApplicationSummary } from "../components/application-summary/application-summary";
 import { UUIDService } from "../services/UUIDService";
-import { JobApplicationRepository } from "../repositories/job-applications";
+import { JobApplicationRepository } from "../repositories/job-application";
 import { inject } from "aurelia";
 
 /**

@@ -5,7 +5,7 @@ import moment from "moment";
 import { EmploymentType } from "../enums/employment-type";
 import { Job } from "../models/Job";
 import { Address } from "../models/Address";
-import { CompaniesRepository } from "./companies";
+import { CompanyRepository } from './company';
 
 /**
  * Repository to perform bulk actions on job applications.
@@ -29,7 +29,7 @@ export class JobApplicationRepository extends RepositoryBase {
           country: "Australia",
         }),
       }),
-      company: CompaniesRepository.companies()[0],
+      company: CompanyRepository.companiesList[0],
       requiresFollowup: true,
     }),
   ];
