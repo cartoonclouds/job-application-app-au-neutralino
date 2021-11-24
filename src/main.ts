@@ -1,4 +1,3 @@
-
 // Register plugins
 import "bootstrap/dist/css/bootstrap.css";
 import "select2/dist/css/select2.min.css";
@@ -12,7 +11,6 @@ import "select2";
 import Aurelia, { DI, Registration, IContainer, IResolver } from "aurelia";
 import { App } from "./app";
 
-
 // Register common components
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
 
@@ -20,7 +18,7 @@ import { SelectDropdown } from "./components/common/select-dropdown/select-dropd
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
 
 // Register custom attributes
-import { EllipsisCustomAttribute } from "./resources/custom-attributes/ellipsis";
+import { TooltipCustomAttribute } from "./resources/custom-attributes/tooltip";
 
 // Register services
 import { SeederService } from "./services/SeederService";
@@ -28,7 +26,7 @@ import { SeederService } from "./services/SeederService";
 const app = Aurelia.register(
   SelectDropdown,
   NumberFormatValueConverter,
-  EllipsisCustomAttribute
+  TooltipCustomAttribute
 ).app(App);
 
 const container = DI.createContainer();

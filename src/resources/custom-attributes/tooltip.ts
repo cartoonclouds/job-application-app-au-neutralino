@@ -1,9 +1,14 @@
 import { bindable, BindingMode } from "aurelia";
+import { tooltip } from "bootstrap";
+
+const bootstrap = require("bootstrap");
 
 /**
- * Ellipsis Attribute
+ * Tooltip Attribute
+ *
+ * @url https://getbootstrap.com/docs/5.0/components/tooltips/
  */
-export class EllipsisCustomAttribute {
+export class TooltipCustomAttribute {
   @bindable({ primary: true, mode: BindingMode.toView }) content: string = "";
   @bindable({ mode: BindingMode.toView }) options: object = {
     html: true,
