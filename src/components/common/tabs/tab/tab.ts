@@ -15,6 +15,7 @@ export class Tab {
   }
 
   public closeTab() {
+    console.log("closeTab", this.id);
     this.tabService.removeTab(this.id);
   }
 }

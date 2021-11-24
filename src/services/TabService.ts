@@ -61,6 +61,8 @@ export class TabService {
       (tab: TabGroup) => tab.id === tabId
     );
 
+    console.log("remove tab", tabIdx);
+
     if (tabIdx >= 0) {
       // open previous tab
       if (this.selectedTab.id === tabId) {

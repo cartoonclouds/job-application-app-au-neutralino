@@ -1,9 +1,8 @@
-<li class="tabs__tab ${selected ? 'tabs__tab--selected' : ''}" click.trigger="showTab()">
-  <button if.bind="tabHeader.options.closeable" click.trigger="closeTab()" type="button"
+<li class="tabs__tab ${selected ? 'tabs__tab--selected' : ''}" click.delegate="showTab()">
+  <button if.bind="tabHeader.options.closeable" click.delegate="closeTab()" type="button"
     class="btn-close text-danger tab_close_icon" aria-label="Close"></button>
 
-  <a href="#${id}" class="tabs__tab__inner"
-    tooltip="content.bind: `HEADER: ${tabHeader.options.label}`;options.bind: {placement: 'bottom'};">
+  <a href="#${id}" class="tabs__tab__inner" ellipsis="3">
     ${tabHeader.options.label}
   </a>
 </li>

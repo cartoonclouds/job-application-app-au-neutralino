@@ -12,6 +12,7 @@ import Aurelia, { DI, Registration, IContainer, IResolver } from "aurelia";
 import { App } from "./app";
 
 // Register common components
+import { SalaryRange } from "./components/common/salary-range/salary-range";
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
 
 // Register value converters
@@ -19,14 +20,19 @@ import { NumberFormatValueConverter } from "./resources/value-converters/number-
 
 // Register custom attributes
 import { TooltipCustomAttribute } from "./resources/custom-attributes/tooltip";
+import { EllipsisCustomAttribute } from "./resources/custom-attributes/ellipsis";
+import { AnimateOnChangeCustomAttribute } from "./resources/custom-attributes/animate-on-change";
 
 // Register services
 import { SeederService } from "./services/SeederService";
 
 const app = Aurelia.register(
+  SalaryRange,
   SelectDropdown,
   NumberFormatValueConverter,
-  TooltipCustomAttribute
+  TooltipCustomAttribute,
+  EllipsisCustomAttribute,
+  AnimateOnChangeCustomAttribute
 ).app(App);
 
 const container = DI.createContainer();
