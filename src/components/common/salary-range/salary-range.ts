@@ -1,7 +1,5 @@
 import { bindable, BindingMode } from "aurelia";
 
-import noUiSlider from "nouislider";
-
 export class SalaryRange {
   @bindable({ mode: BindingMode.twoWay }) public range: NumberRange;
   @bindable({ mode: BindingMode.oneTime }) public step: number = 0.5;
@@ -11,15 +9,14 @@ export class SalaryRange {
 
   constructor(private readonly element) {}
 
-  public attached() {
-    this.slider = this.element.getElementById("salary-range-slider");
-
-    /*noUiSlider.create(this.slider, {
+  // public attached() {
+  // this.slider = this.element.getElementById("salary-range-slider");
+  /*noUiSlider.create(this.slider, {
       start: [4000, 8000],
       range: {
         min: [2000],
         max: [10000],
       },
     });*/
-  }
+  // }
 }

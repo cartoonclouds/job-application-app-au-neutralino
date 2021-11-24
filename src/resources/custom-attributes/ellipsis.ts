@@ -19,6 +19,6 @@ export class EllipsisCustomAttribute {
   constructor(private readonly element: HTMLElement) {}
 
   public attached() {
-    clamp(this.element, 3);
+    clamp(this.element, this.lines);
   }
 }

@@ -7,6 +7,9 @@ import "bootstrap";
 import "jquery";
 import "jquery-ui";
 import "select2";
+// import "nouislider";
+
+import noUiSlider from "nouislider";
 
 import Aurelia, { DI, Registration, IContainer, IResolver } from "aurelia";
 import { App } from "./app";
