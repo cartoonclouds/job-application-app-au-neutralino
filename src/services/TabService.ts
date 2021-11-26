@@ -17,6 +17,7 @@ import { UUIDService } from "../services/UUIDService";
 @inject()
 export class TabService {
   public static tabList = [];
+  private static openApplicationIdx = [0];
 
   constructor(
     public readonly jobApplicationRepository: JobApplicationRepository
@@ -109,6 +110,15 @@ export class TabService {
   }
 
   public addJobApplicationTab() {
+    do {
+      var newIdx = Math.floor(Math.random() * 30 + 1);
+    } while (TabService.openApplicationIdx.includes(newIdx));
+
+    TabService.openApplicationIdx.push(newIdx);
+
+    const jobApplication =
+      this.jobApplicationRepository.jobApplications()[newIdx];
+
     const newTab = new TabGroup(
       UUIDService.generate(),
       new TabHeader({
@@ -116,13 +126,13 @@ export class TabService {
         tooltip: `Tooltip for tab ${TabService.tabCount()}`,
       }),
       new TabContent({
-        viewModel: ApplicationSummary,
+        viewModel: JobApplicationTab,
         model: {
-          newMessage:
-            "Aenean lacinia! Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.",
+          jobApplication,
         },
       })
     );
+
     TabService.tabList.push(newTab);
 
     this.openTab(newTab.id);

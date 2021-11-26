@@ -1,5 +1,3 @@
-import { Job } from "../models/Job";
-
 type ResolversParentTypes = "PayRate" | "NumberRange";
 
 export class ObjectUtility {
@@ -14,5 +12,16 @@ export class ObjectUtility {
     typename: ModelType
   ): obj is ResolversParentTypes[ModelType] {
     return obj?.__typename === typename;
+  }
+
+  /**
+   * Helper function of Object.assign - joins two or more objects.
+   *
+   * @param obj1
+   * @param obj2
+   * @returns
+   */
+  public static joinIntoNew(obj1, obj2): object {
+    return Object.assign({}, ...arguments);
   }
 }

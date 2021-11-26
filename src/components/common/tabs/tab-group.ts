@@ -1,22 +1,25 @@
-import { observable } from "@aurelia/runtime";
-interface ITabHeaderOptions {
-  label: string;
-  tooltip?: string;
-  initallySelected?: boolean; //@TODO Make sure only one is selected
-  disabled?: boolean;
-  closeable?: boolean;
-  moveable?: boolean;
-}
-
 interface ITabContentOptions {
   viewModel: any;
   model?: any;
 }
 
 export class TabHeader {
-  constructor(public readonly options: ITabHeaderOptions) {
-    this.options.closeable = options.closeable ?? true;
-    this.options.moveable = options.moveable ?? true;
+  label: string;
+  tooltip?: string;
+  disabled: boolean = false;
+  closeable: boolean = true;
+  moveable: boolean = true;
+
+  constructor(options?: Partial<TabHeader>) {
+    if (options) {
+      options = Object.assign(new TabHeader(), options);
+
+      this.label = options.label;
+      this.tooltip = options.tooltip;
+      this.disabled = options.disabled;
+      this.closeable = options.closeable;
+      this.moveable = options.moveable;
+    }
   }
 }
 

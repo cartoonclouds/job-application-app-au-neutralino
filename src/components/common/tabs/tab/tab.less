@@ -2,7 +2,6 @@
   /* Tab Bar */
   .tabs {
     display: flex;
-    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     border-bottom: 2px solid #d0d0d0;
@@ -10,6 +9,7 @@
   }
 
   .tabs__tab {
+    flex: 1;
     display: inline-block;
     background-color: #e6e6e6;
     position: relative;
@@ -17,13 +17,6 @@
     border-left: none;
     border-top: 2px solid #939393;
     border-right: 2px solid #939393;
-
-    margin-inline-end: 0;
-    margin-inline-start: 0;
-
-    &:last-of-type {
-      border-left: 2px solid #939393;
-    }
 
     &:not(.tabs__tab--selected):hover {
       background-color: #f1f1f1;
@@ -42,14 +35,11 @@
     color: #000;
     display: block;
     padding: 14px 26px;
-    max-width: 200px;
-    height: 100%;
+    // height: 100px;
+    // height: 100%;
     text-decoration: none;
     text-transform: capitalize;
     text-align: center;
-
-    //required for ellipsis attribute
-    vertical-align: bottom;
 
     &:hover {
       color: #000;
@@ -58,7 +48,8 @@
 
   .tabs__tab_new {
     margin-left: auto;
-    align-self: flex-end;
+    flex: 0;
+    white-space: nowrap;
   }
 
   .tab_close_icon {

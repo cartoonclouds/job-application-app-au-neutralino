@@ -7,15 +7,20 @@ export class Tab {
   @bindable({ mode: BindingMode.oneTime }) id: string;
   @bindable({ mode: BindingMode.twoWay }) selected: boolean = false;
   @bindable({ mode: BindingMode.twoWay }) tabHeader: TabHeader;
+  @bindable({ mode: BindingMode.oneTime })
+  onClick: () => any = this.showTab;
 
   constructor(private readonly tabService: TabService) {}
 
-  public showTab() {
-    this.tabService.openTab(this.id);
+  public closeTab() {
+    this.tabService.removeTab(this.id);
+
+    return true;
   }
 
-  public closeTab() {
-    console.log("closeTab", this.id);
-    this.tabService.removeTab(this.id);
+  public showTab() {
+    this.tabService.openTab(this.id);
+
+    return true;
   }
 }

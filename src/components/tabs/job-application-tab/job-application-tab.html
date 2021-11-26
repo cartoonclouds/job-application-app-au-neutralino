@@ -1,15 +1,40 @@
-<import from="./../../actions/actions"></import>
 <import from="./../../company-details/company-details"></import>
 <import from="./../../job-details/job-details"></import>
 
-<div class="row">
+<div class="row tab">
   <div class="details-column col-4 pe-2">
     <job-details job.bind="jobApplication.job" class="job-application-section"></job-details>
     <hr>
     <company-details company.bind="jobApplication.company" class="job-application-section"></company-details>
   </div>
 
-  <div class="col">
-    <actions actions.bind="jobApplication.actions" class="job-application-section"></actions>
+  <div class="actions-column col">
+    <!-- <actions actions.bind="jobApplication.actions" class="job-application-section"></actions> -->
+
+    <fieldset class="p-2 pt-4 actions-fieldset">
+      <legend class="pt-0 fieldset-header">Actions</legend>
+
+      <data-table table-headers.bind="actionsTableHeaders" data-model.bind="jobApplication.actions">
+        <template au-slot="table-row">
+          <tr>
+            <td>
+              ${$host.item.parentAction.id}
+            </td>
+            <td>
+              ${$host.item.contactMethod}
+            </td>
+            <td>
+              ${$host.item.contactPerson.name}
+            </td>
+            <td>
+              ${$host.item.comments}
+            </td>
+            <td>
+              ${$host.item.requiresFollowup ? "YES" : "NO"}
+            </td>
+          </tr>
+        </template>
+      </data-table>
+    </fieldset>
   </div>
 </div>

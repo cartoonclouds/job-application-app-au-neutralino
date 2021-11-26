@@ -18,6 +18,7 @@ import { modelSchema } from "../decorators/model-schema";
   comments: "string",
   reference: "string",
   address: "Address",
+  website: "string",
 })
 export class Job extends Model<Job> {
   public url?: string;
@@ -30,6 +31,7 @@ export class Job extends Model<Job> {
   public profession?: JobProfessionEnum; // programmer, clerk, librarian JobProfession
   public employmentType?: EmploymentTypeEnum;
   public address?: Address;
+  public website: string;
 
   constructor(attributes?: Partial<Job>) {
     super(attributes);

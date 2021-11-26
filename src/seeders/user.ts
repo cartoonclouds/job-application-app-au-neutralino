@@ -1,6 +1,8 @@
 import { User } from "../models/User";
 import { Seeder } from "./seeder";
 import { AddressSeeder } from "./address";
+import moment from "moment";
+import { UUIDService } from "../services/UUIDService";
 
 const faker = require("faker");
 
@@ -17,6 +19,9 @@ export class UserSeeder extends Seeder<User> {
 
   private generate(withRelations: boolean = true): User {
     return new User({
+      id: UUIDService.generate(),
+      createdAt: moment(),
+      updatedAt: moment(),
       name: faker.name.findName(),
       email: faker.internet.email(),
       title: faker.name.prefix(),

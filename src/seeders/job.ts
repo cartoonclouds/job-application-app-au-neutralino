@@ -4,15 +4,14 @@ import {
   JobProfessionEnum,
   JobProfessionEnumCount,
 } from "../enums/job-profession";
-import {
-  EmploymentTypeEnum,
-  EmploymentTypeEnumCount,
-} from "../enums/employment-type";
+import { EmploymentTypeEnum } from "../enums/employment-type";
 import moment from "moment";
 import { NumberRangeUtility } from "../utilities/number-range-utility";
 import { PayRateUtility } from "../utilities/pay-rate-utility";
-import { PayRateUnitEnum, PayRateUnitEnumCount } from "../enums/pay-rate-unit";
+import { PayRateUnitEnum } from "../enums/pay-rate-unit";
 import { AddressSeeder } from "./address";
+import { EnumUtility } from "../utilities/enum-utility";
+import { UUIDService } from "../services/UUIDService";
 
 const faker = require("faker");
 
@@ -35,19 +34,22 @@ export class JobSeeder extends Seeder<Job> {
     );
 
     return new Job({
+      id: UUIDService.generate(),
+      createdAt: moment(),
+      updatedAt: moment(),
       profession: JobProfessionEnum[this.randomInt(0, JobProfessionEnumCount)],
-      employmentType:
-        EmploymentTypeEnum[this.randomInt(0, EmploymentTypeEnumCount)],
+      employmentType: EnumUtility.getRandomEnum(EmploymentTypeEnum),
       closingDate: moment().add(this.randomInt(), "day"),
       salary,
       rate: PayRateUtility.create(
         this.randomInt(),
-        PayRateUnitEnum[this.randomInt(0, PayRateUnitEnumCount)]
+        EnumUtility.getRandomEnum(PayRateUnitEnum)
       ),
       url: faker.internet.url(),
       comments: faker.lorem.paragraph(),
       reference: faker.lorem.paragraph(),
       address: withRelations ? AddressSeeder.generate() : undefined,
+      website: faker.internet.domainName(),
     });
   }
 }
