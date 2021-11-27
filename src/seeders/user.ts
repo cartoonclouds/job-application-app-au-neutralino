@@ -18,14 +18,15 @@ export class UserSeeder extends Seeder<User> {
   }
 
   private generate(withRelations: boolean = true): User {
-    return new User({
-      id: UUIDService.generate(),
-      createdAt: moment(),
-      updatedAt: moment(),
-      name: faker.name.findName(),
-      email: faker.internet.email(),
-      title: faker.name.prefix(),
-      address: withRelations ? AddressSeeder.generate() : undefined,
-    });
+    const standardProperties = this.generateStandardProperties();
+
+    return new User(
+      Object.assign(standardProperties, {
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        title: faker.name.prefix(),
+        address: withRelations ? AddressSeeder.generate() : undefined,
+      })
+    );
   }
 }

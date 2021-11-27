@@ -20,10 +20,9 @@ export class CompanySeeder extends Seeder<Company> {
   }
 
   private generate(withRelations: boolean = true): Company {
-    return new Company({
-      id: UUIDService.generate(),
-      createdAt: moment(),
-      updatedAt: moment(),
+    const standardProperties = this.generateStandardProperties();
+
+    return new Company(Object.assign(standardProperties, {
       name: faker.company.companyName(),
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber(),
@@ -33,6 +32,6 @@ export class CompanySeeder extends Seeder<Company> {
       contactPeople: withRelations
         ? PersonSeeder.run(this.randomInt(0, 5))
         : undefined,
-    });
+    }));
   }
 }

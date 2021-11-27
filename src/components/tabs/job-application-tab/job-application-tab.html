@@ -18,7 +18,7 @@
         <template au-slot="table-row">
           <tr>
             <td>
-              ${$host.item.parentAction.id}
+              ${$host.item.createdAt.format("DD/mm/YYYY")}
             </td>
             <td>
               ${$host.item.contactMethod}
@@ -27,10 +27,11 @@
               ${$host.item.contactPerson.name}
             </td>
             <td>
-              ${$host.item.comments}
+              <i
+                class="fas fa-${$host.item.requiresFollowup ? 'check' : 'times'}-circle text-${$host.item.requiresFollowup ? 'success' : 'danger'}"></i>
             </td>
             <td>
-              ${$host.item.requiresFollowup ? "YES" : "NO"}
+              ellipsis-menu
             </td>
           </tr>
         </template>

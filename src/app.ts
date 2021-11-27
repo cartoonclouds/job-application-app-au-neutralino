@@ -39,6 +39,6 @@ export class App {
   }
 
   attached() {
-    this.tabService.openTab(this.tabs[1].id);
+    this.tabService.openTab(this.tabs[0].id);
   }
 }

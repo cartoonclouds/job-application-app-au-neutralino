@@ -8,8 +8,8 @@ export class JobApplicationTab {
 
   public readonly actionsTableHeaders = [
     new DataTableHeader({
-      displayName: "Parent Action",
-      propertyGetter: (action: Action) => action.parentAction.id,
+      displayName: "Created",
+      propertyGetter: (action: Action) => action.createdAt.toISOString(),
     }),
     new DataTableHeader({
       displayName: "Contact Method",
@@ -20,13 +20,13 @@ export class JobApplicationTab {
       propertyGetter: (action: Action) => action.contactPerson.name,
     }),
     new DataTableHeader({
-      displayName: "Comments",
-      propertyGetter: (action: Action) => action.comments,
-    }),
-    new DataTableHeader({
       displayName: "Requires Follow-up",
-      propertyGetter: (action: Action) =>
-        action.requiresFollowup ? "YES" : "NO",
+      propertyGetter: (action: Action) => (action.requiresFollowup ? "1" : "0"),
+    }),
+
+    new DataTableHeader({
+      isSortable: false,
+      isSearchable: false,
     }),
   ];
 

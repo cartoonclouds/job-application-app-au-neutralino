@@ -33,23 +33,28 @@ export class JobSeeder extends Seeder<Job> {
       this.randomInt(lowerNumberRange, 99)
     );
 
-    return new Job({
-      id: UUIDService.generate(),
-      createdAt: moment(),
-      updatedAt: moment(),
-      profession: JobProfessionEnum[this.randomInt(0, JobProfessionEnumCount)],
-      employmentType: EnumUtility.getRandomEnum(EmploymentTypeEnum),
-      closingDate: moment().add(this.randomInt(), "day"),
-      salary,
-      rate: PayRateUtility.create(
-        this.randomInt(),
-        EnumUtility.getRandomEnum(PayRateUnitEnum)
-      ),
-      url: faker.internet.url(),
-      comments: faker.lorem.paragraph(),
-      reference: faker.lorem.paragraph(),
-      address: withRelations ? AddressSeeder.generate() : undefined,
-      website: faker.internet.domainName(),
-    });
+    const standardProperties = this.generateStandardProperties();
+
+    return new Job(
+      Object.assign(standardProperties, {
+        title: faker.company.companyName(),
+        profession:
+          JobProfessionEnum[this.randomInt(0, JobProfessionEnumCount)],
+        employmentType: EnumUtility.getRandomEnum(EmploymentTypeEnum),
+        closingDate: standardProperties.createdAt.add(
+          this.randomDate().toObject()
+        ),
+        salary,
+        rate: PayRateUtility.create(
+          this.randomInt(),
+          EnumUtility.getRandomEnum(PayRateUnitEnum)
+        ),
+        url: faker.internet.url(),
+        comments: faker.lorem.paragraph(),
+        reference: faker.lorem.paragraph(),
+        address: withRelations ? AddressSeeder.generate() : undefined,
+        website: faker.internet.domainName(),
+      })
+    );
   }
 }

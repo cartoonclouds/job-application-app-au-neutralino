@@ -16,6 +16,7 @@ import { modelSchema } from "../decorators/model-schema";
   rate: "PayRate",
   url: "string",
   comments: "string",
+  title: "string",
   reference: "string",
   address: "Address",
   website: "string",
@@ -24,6 +25,7 @@ export class Job extends Model<Job> {
   public url?: string;
   public comments?: string;
   public reference?: string;
+  public title?: string;
 
   public closingDate?: moment.Moment;
   public salary?: NumberRange;

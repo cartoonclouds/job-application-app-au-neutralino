@@ -1,7 +1,7 @@
 import { Model } from "./Model";
 import { modelSchema } from "../decorators/model-schema";
-import { Address } from './Address';
-import { Person } from './Person';
+import { Address } from "./Address";
+import { Person } from "./Person";
 /**
  * Company Model
  */
@@ -15,7 +15,7 @@ import { Person } from './Person';
   contactPeople: "Person[]",
 })
 export class Company extends Model<Company> {
-  public name?: string;
+  public name: string;
   public email?: string;
   public phone?: string;
   public url?: string;

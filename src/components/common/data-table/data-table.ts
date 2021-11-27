@@ -66,6 +66,7 @@ export class DataTable {
   public wrapper: HTMLDivElement;
 
   constructor(
+    private readonly element: Element,
     private readonly eventAggregator: EventAggregator,
     private readonly filterValueConverter: FilterValueConverter,
     private readonly sortValueConverter: SortValueConverter
@@ -112,13 +113,13 @@ export class DataTable {
     this.wrapper.scrollTop = 0;
   }
 
-  public sortOn(newSortingHeader: any) {
+  public sortOn(newSortingHeader: DataTableHeader) {
     if (!newSortingHeader.isSortable) {
       return;
     }
 
     // if clicking the same header, toggle ascending
-    if ((this.sortingHeader = newSortingHeader)) {
+    if (this.sortingHeader == newSortingHeader) {
       this.sortAscending = !this.sortAscending;
     } else {
       this.sortingHeader = newSortingHeader;

@@ -69,3 +69,36 @@
     </div>
   </div>
 </div>
+
+
+<fieldset class="p-2 pt-4">
+  <legend class="pt-0 fieldset-header">Job Applications</legend>
+
+  <data-table table-headers.bind="jobApplicationTableHeaders" data-model.bind="jobApplications">
+    <template au-slot="table-row">
+      <tr>
+        <td>
+          ${$host.item.createdAt.format("DD/mm/YYYY")}
+        </td>
+        <td>
+          ${$host.item.job.title}
+        </td>
+        <td>
+          ${$host.item.company.name}
+        </td>
+        <td>
+          <span
+            if.bind="$host.item.company && $host.item.company.contactPeople.length > 0">${$host.item.company.contactPeople[0].name}</span>
+          <span else>-</span>
+        </td>
+        <td>
+          <i
+            class="fas fa-${$host.item.requiresFollowup ? 'check' : 'times'}-circle text-${$host.item.requiresFollowup ? 'success' : 'danger'}"></i>
+        </td>
+        <td>
+          ellipsis-menu
+        </td>
+      </tr>
+    </template>
+  </data-table>
+</fieldset>

@@ -9,9 +9,8 @@
               <a class="no-decorate" href="#" click.trigger="sortOn(header)">
                 ${header.displayName}
 
-                <template if.bind="header == sortingHeader">
-                  <sort-icon ascending.bind="sortAscending"></sort-icon>
-                </template>
+                <sort-icon v-if="isSortable" sorting.bind="header == sortingHeader" ascending.bind="sortAscending">
+                </sort-icon>
               </a>
             </au-slot>
           </th>

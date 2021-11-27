@@ -17,13 +17,14 @@ export class PersonSeeder extends Seeder<Person> {
   }
 
   private generate(withRelations: boolean = true): Person {
-    return new Person({
-      id: UUIDService.generate(),
-      createdAt: moment(),
-      updatedAt: moment(),
-      name: faker.name.findName(),
-      email: faker.internet.email(),
-      title: faker.name.prefix(),
-    });
+    const standardProperties = this.generateStandardProperties();
+
+    return new Person(
+      Object.assign(standardProperties, {
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        title: faker.name.prefix(),
+      })
+    );
   }
 }

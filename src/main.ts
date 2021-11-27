@@ -17,7 +17,8 @@ import { App } from "./app";
 // Register common components
 // import { SalaryRange } from "./components/common/salary-range/salary-range";
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
-import { DataTable } from './components/common/data-table/data-table';
+import { DataTable } from "./components/common/data-table/data-table";
+import { SortIcon } from "./components/common/sort-icon/sort-icon";
 
 // Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
@@ -32,6 +33,7 @@ import { SeederService } from "./services/SeederService";
 
 const app = Aurelia.register(
   // SalaryRange,
+  SortIcon,
   SelectDropdown,
   DataTable,
   NumberFormatValueConverter,

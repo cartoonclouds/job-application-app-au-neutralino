@@ -20,14 +20,19 @@ export class JobApplicationSeeder extends Seeder<JobApplication> {
   }
 
   private generate(withRelations: boolean = true): JobApplication {
-    return new JobApplication({
-      id: UUIDService.generate(),
-      createdAt: moment(),
-      updatedAt: moment(),
-      requiresFollowup: faker.datatype.boolean(),
-      job: withRelations ? JobSeeder.generate() : undefined,
-      company: withRelations ? CompanySeeder.generate() : undefined,
-      actions: withRelations ? ActionSeeder.run(this.randomInt()) : undefined,
-    });
+    const standardProperties = this.generateStandardProperties();
+
+    return new JobApplication(
+      Object.assign(
+        Object.assign(standardProperties, {
+          requiresFollowup: faker.datatype.boolean(),
+          job: withRelations ? JobSeeder.generate() : undefined,
+          company: withRelations ? CompanySeeder.generate() : undefined,
+          actions: withRelations
+            ? ActionSeeder.run(this.randomInt())
+            : undefined,
+        })
+      )
+    );
   }
 }
