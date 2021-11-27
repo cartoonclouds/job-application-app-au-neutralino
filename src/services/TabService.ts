@@ -62,8 +62,6 @@ export class TabService {
       (tab: TabGroup) => tab.id === tabId
     );
 
-    console.log("remove tab", tabIdx);
-
     if (tabIdx >= 0) {
       // open previous tab
       if (this.selectedTab.id === tabId) {
@@ -72,7 +70,6 @@ export class TabService {
         this.openTab(previousTab.id);
       }
 
-      //TODO Fix bug when deleting middle tabs
       TabService.tabList.splice(tabIdx, 1);
     }
 

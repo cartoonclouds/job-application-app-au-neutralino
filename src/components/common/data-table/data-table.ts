@@ -1,16 +1,15 @@
-import { BindingMode, bindable, EventAggregator } from "aurelia";
-import * as _ from "underscore";
-import { ArrayUtility } from "../../../utilities/array-utility";
-import {
-  FilterValueConverter,
-  SortValueConverter,
-} from "../../../resources/value-converters/array";
+import { bindable, BindingMode, EventAggregator, inject, INode, IPlatform } from 'aurelia';
+import * as _ from 'underscore';
+
+import { FilterValueConverter } from '../../../resources/value-converters/array';
+import { ArrayUtility } from '../../../utilities/array-utility';
 
 export class DataTableHeader {
   public displayName: string = "";
   public class: string = "";
   public propertyGetter: (key: any, value?: any) => any;
   public sortValueGetter: (key: any, value?: any) => any;
+
   // function to calculate a total of a header column.
   public totalFn: (columnData) => any = (columnData) => null;
 
@@ -40,6 +39,7 @@ export class DataTableFilter {
   ) {}
 }
 
+@inject()
 export class DataTable {
   @bindable({ mode: BindingMode.toView }) dataModel: any[];
   @bindable({ mode: BindingMode.toView }) tableHeaders: DataTableHeader[];
@@ -68,8 +68,7 @@ export class DataTable {
   constructor(
     private readonly element: Element,
     private readonly eventAggregator: EventAggregator,
-    private readonly filterValueConverter: FilterValueConverter,
-    private readonly sortValueConverter: SortValueConverter
+    private readonly filterValueConverter: FilterValueConverter
   ) {}
 
   public binding() {
@@ -80,6 +79,7 @@ export class DataTable {
   public attached() {
     this.search = "";
   }
+
 
   public selectRow(rowModel, event) {
     if (!this.onSelect) {

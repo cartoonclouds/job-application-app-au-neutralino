@@ -1,9 +1,10 @@
+import { inject } from "aurelia";
 import { JobApplication } from "../../../models";
 import { ActionRepository } from "../../../repositories/action";
 import { CompanyRepository } from "../../../repositories/company";
 import { JobApplicationRepository } from "../../../repositories/job-application";
 import { DataTableHeader } from "../../common/data-table/data-table";
-
+@inject()
 export class SummaryTab {
   public readonly jobApplicationTableHeaders = [
     new DataTableHeader({
@@ -43,6 +44,10 @@ export class SummaryTab {
     public readonly actionsRepository: ActionRepository,
     public readonly companyRepository: CompanyRepository
   ) {}
+
+  public attached() {
+    console.log(this.jobApplications);
+  }
 
   public get applicationsRequiringFollowup(): number {
     return this.applicationRepository.getApplicationsRequiringFollowup().length;

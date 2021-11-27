@@ -9,7 +9,8 @@
               <a class="no-decorate" href="#" click.trigger="sortOn(header)">
                 ${header.displayName}
 
-                <sort-icon v-if="isSortable" sorting.bind="header == sortingHeader" ascending.bind="sortAscending">
+                <sort-icon if.bind="header.isSortable" sorting.bind="header == sortingHeader"
+                  ascending.bind="sortAscending">
                 </sort-icon>
               </a>
             </au-slot>
@@ -19,27 +20,23 @@
     </au-slot>
 
     <tbody class="table-body ${item == selectedRowModel ? 'selected' : ''}">
-      <!-- <tr repeat.for="item of dataModel" tabindex="0" click.trigger="selectRow(row, $event)"
-        keypress.trigger="keyboardHandler(item, $event)"
-        class="${tableBodyRowClass} ${selectable && item == selectedRowModel ? 'selected':''}"> -->
-      <template repeat.for="item of dataModel
+
+      <tr repeat.for="item of dataModel
           | filter:filterOn.bind($this)
           | filter:searchOn.bind($this)
-          | sort:(sortingHeader.sortValueGetter || sortingHeader.propertyGetter):sortAscending">
-        <au-slot name="table-row" expose.bind="{ item, $event, $odd, $index }">
-          <tr>
-            <td></td>
-          </tr>
-        </au-slot>
-        <!-- </tr> -->
-      </template>
+          | sort:(sortingHeader.sortValueGetter || sortingHeader.propertyGetter):sortAscending" tabindex="0"
+        click.trigger="selectRow(row, $event)" keypress.trigger="keyboardHandler(item, $event)"
+        class="${tableBodyRowClass} ${selectable && item == selectedRowModel ? 'selected':''}"
+        expose.bind="{ item, $event, $odd, $index }">
+        <template as-element="au-slot" name="row"></template>
+      </tr>
 
       <template if.bind="showEmptyState" class="empty-row ${tableBodyRowClass}">
-        <au-slot name="empty-row">
+        <template as-element="au-slot" name="empty-row">
           <tr>
             <td></td>
           </tr>
-        </au-slot>
+        </template>
       </template>
     </tbody>
 

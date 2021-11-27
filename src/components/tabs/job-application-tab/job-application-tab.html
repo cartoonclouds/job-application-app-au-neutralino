@@ -15,25 +15,23 @@
       <legend class="pt-0 fieldset-header">Actions</legend>
 
       <data-table table-headers.bind="actionsTableHeaders" data-model.bind="jobApplication.actions">
-        <template au-slot="table-row">
-          <tr>
-            <td>
-              ${$host.item.createdAt.format("DD/mm/YYYY")}
-            </td>
-            <td>
-              ${$host.item.contactMethod}
-            </td>
-            <td>
-              ${$host.item.contactPerson.name}
-            </td>
-            <td>
-              <i
-                class="fas fa-${$host.item.requiresFollowup ? 'check' : 'times'}-circle text-${$host.item.requiresFollowup ? 'success' : 'danger'}"></i>
-            </td>
-            <td>
-              ellipsis-menu
-            </td>
-          </tr>
+        <template au-slot="row">
+          <td>
+            ${$host.item.createdAt.format("DD/mm/YYYY")}
+          </td>
+          <td>
+            ${$host.item.contactMethod}
+          </td>
+          <td>
+            ${$host.item.contactPerson.name}
+          </td>
+          <td>
+            <i
+              class="fas fa-${$host.item.requiresFollowup ? 'check' : 'times'}-circle text-${$host.item.requiresFollowup ? 'success' : 'danger'}"></i>
+          </td>
+          <td>
+            ellipsis-menu
+          </td>
         </template>
       </data-table>
     </fieldset>

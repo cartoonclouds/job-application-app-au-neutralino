@@ -40,7 +40,9 @@ const dr = dumber({
 
   // prepend before amd loader.
   // dumber-module-loader is injected automatically by dumber bundler after prepends.
+  // Add global vars https://github.com/dumberjs/dumber/commit/36cb1d4
   // prepend: [],
+  // append: [],
 
   // Explicit dependencies, can use either "deps" (short name) or "dependencies" (full name).
   // deps: [],

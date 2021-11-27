@@ -22,6 +22,7 @@ import { SortIcon } from "./components/common/sort-icon/sort-icon";
 
 // Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
+import { FilterValueConverter, SortValueConverter } from './resources/value-converters/array';
 
 // Register custom attributes
 import { TooltipCustomAttribute } from "./resources/custom-attributes/tooltip";
@@ -37,6 +38,8 @@ const app = Aurelia.register(
   SelectDropdown,
   DataTable,
   NumberFormatValueConverter,
+  SortValueConverter,
+  FilterValueConverter,
   TooltipCustomAttribute,
   EllipsisCustomAttribute,
   AnimateOnChangeCustomAttribute
