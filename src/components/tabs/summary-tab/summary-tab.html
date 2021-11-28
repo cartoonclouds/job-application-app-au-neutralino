@@ -1,78 +1,28 @@
+<require from="./../../application-statistic/application-statistic"></require>
+
 <fieldset class="p-2 pt-4 statistics-fieldset">
   <legend class="pt-0 fieldset-header">Applications Statistics</legend>
 
-  <div class="row row-cols-2 g-4">
+  <div class="row row-cols-4 g-4">
+    <application-statistic title="Job Application Count" text.bind="applicationRepository.jobApplicationCount"
+      icon="<i class='fas fa-angle-up'></i>">
+    </application-statistic>
 
-    <div class="col">
-      <div class="card h-100">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <i class="fas fa-angle-up"></i>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Job Application Count</h5>
-              <p class="card-text">
-                ${applicationRepository.jobApplicationCount}</p>
+    <application-statistic title="Applied Company Count" text.bind="companyRepository.companyCount"
+      icon="<i class='fas fa-cube img-fluid rounded-start'></i>">
+    </application-statistic>
 
-              <p>
-                <!-- <salary-range></salary-range> -->
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <application-statistic title="Job Applications Requiring Follow-up" text.bind="applicationsRequiringFollowup"
+      icon="<i class='fas fa-cube img-fluid rounded-start'></i>">
+    </application-statistic>
 
-    <div class="col">
-      <div class="card h-100">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <i class="fas fa-cube img-fluid rounded-start"></i>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Applied Company Count</h5>
-              <p class="card-text">${companyRepository.companyCount}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card h-100">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <i class="fas fa-cube img-fluid rounded-start"></i>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Job Applications Requiring Follow-up</h5>
-              <p class="card-text">${applicationsRequiringFollowup}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card h-100">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <i class="fas fa-angle-up"></i>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Job Actions Requiring Follow-up</h5>
-              <p class="card-text">${actionsRequiringFollowup}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <application-statistic title="Job Actions Requiring Follow-up" text.bind="actionsRequiringFollowup"
+      icon="<i class='fas fa-angle-up'></i>">
+    </application-statistic>
   </div>
 </fieldset>
+
+<hr>
 
 <fieldset class="p-2 pt-4">
   <legend class="pt-0 fieldset-header">Job Applications</legend>
@@ -93,7 +43,7 @@
           if.bind="$host.item.company && $host.item.company.contactPeople.length > 0">${$host.item.company.contactPeople[0].name}</span>
         <span else>-</span>
       </td>
-      <td>
+      <td class="text-center">
         <i
           class="fas fa-${$host.item.requiresFollowup ? 'check' : 'times'}-circle text-${$host.item.requiresFollowup ? 'success' : 'danger'}"></i>
       </td>

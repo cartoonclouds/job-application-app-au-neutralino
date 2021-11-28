@@ -1,5 +1,9 @@
 // import { bindable, BindingMode } from "aurelia";
 
+// import "nouislider";
+
+// import noUiSlider from "nouislider";
+
 // export class SalaryRange {
 //   @bindable({ mode: BindingMode.twoWay }) public range: NumberRange;
 //   @bindable({ mode: BindingMode.oneTime }) public step: number = 0.5;

@@ -1,6 +1,5 @@
 import { inject } from "aurelia";
 
-import { ApplicationSummary } from "../components/application-summary/application-summary";
 import {
   TabContent,
   TabGroup,

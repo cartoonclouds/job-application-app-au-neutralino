@@ -1,7 +1,8 @@
-import { bindable, BindingMode, containerless, EventAggregator } from "aurelia";
+import { bindable, BindingMode, containerless, EventAggregator, inject } from "aurelia";
 import { TabHeader } from "../tab-group";
 import { TabService } from "../../../../services/TabService";
 
+@inject()
 @containerless
 export class Tab {
   @bindable({ mode: BindingMode.oneTime }) id: string;

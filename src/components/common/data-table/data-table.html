@@ -1,3 +1,5 @@
+<require from="./sort-icon/sort-icon"></require>
+
 <div class="table-responsive">
 
   <table class="table ${tableClass} ${hoverable ? 'hoverable' : ''}">
@@ -28,6 +30,7 @@
         click.trigger="selectRow(row, $event)" keypress.trigger="keyboardHandler(item, $event)"
         class="${tableBodyRowClass} ${selectable && item == selectedRowModel ? 'selected':''}"
         expose.bind="{ item, $event, $odd, $index }">
+        <!-- https://aurelia.io/docs/binding/basics#contextual-properties -->
         <template as-element="au-slot" name="row"></template>
       </tr>
 

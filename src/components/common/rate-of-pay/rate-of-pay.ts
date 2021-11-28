@@ -1,7 +1,8 @@
-import { bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode, inject } from "aurelia";
 import { NavigationKeys } from "../../../custom_typings/keyboard-keys";
 import { PayRateUnitEnum } from "../../../enums/pay-rate-unit";
 
+@inject()
 export class RateOfPay {
   @bindable({ mode: BindingMode.twoWay }) public rate: PayRate;
   @bindable({ mode: BindingMode.oneTime }) public step: number = 0.05;

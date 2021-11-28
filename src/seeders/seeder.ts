@@ -38,7 +38,7 @@ export abstract class Seeder<T> {
   }
 
   protected generateStandardProperties() {
-    const createdAt = this.randomDate();
+    const createdAt = this.randomDate().year(moment().year());
 
     return {
       id: UUIDService.generate(),

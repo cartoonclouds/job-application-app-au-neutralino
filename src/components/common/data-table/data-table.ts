@@ -1,9 +1,17 @@
-import { bindable, BindingMode, EventAggregator, inject, INode, IPlatform } from 'aurelia';
-import * as _ from 'underscore';
+import {
+  bindable,
+  BindingMode,
+  EventAggregator,
+  inject,
+  INode,
+  IPlatform,
+} from "aurelia";
+import * as _ from "underscore";
 
-import { FilterValueConverter } from '../../../resources/value-converters/array';
-import { ArrayUtility } from '../../../utilities/array-utility';
+import { FilterValueConverter } from "../../../resources/value-converters/array";
+import { ArrayUtility } from "../../../utilities/array-utility";
 
+@inject()
 export class DataTableHeader {
   public displayName: string = "";
   public class: string = "";
@@ -79,7 +87,6 @@ export class DataTable {
   public attached() {
     this.search = "";
   }
-
 
   public selectRow(rowModel, event) {
     if (!this.onSelect) {

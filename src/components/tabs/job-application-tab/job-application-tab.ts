@@ -1,8 +1,8 @@
-import { bindable } from "aurelia";
+import { bindable, inject } from "aurelia";
 import { JobApplication } from "../../../models/JobApplication";
 import { DataTableHeader } from "../../common/data-table/data-table";
 import { Action } from "../../../models/Action";
-
+@inject()
 export class JobApplicationTab {
   @bindable jobApplication: JobApplication = new JobApplication();
 
@@ -22,11 +22,13 @@ export class JobApplicationTab {
     new DataTableHeader({
       displayName: "Requires Follow-up",
       propertyGetter: (action: Action) => (action.requiresFollowup ? "1" : "0"),
+      class: "text-center",
     }),
 
     new DataTableHeader({
       isSortable: false,
       isSearchable: false,
+      class: "actions",
     }),
   ];
 

@@ -31,11 +31,13 @@ export class SummaryTab {
       displayName: "Requires Follow-up",
       propertyGetter: (application: JobApplication) =>
         application.requiresFollowup ? "1" : "0",
+        class: "text-center",
     }),
 
     new DataTableHeader({
       isSortable: false,
       isSearchable: false,
+      class: "actions",
     }),
   ];
 

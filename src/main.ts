@@ -1,15 +1,10 @@
 // Register plugins
 import "bootstrap/dist/css/bootstrap.css";
-import "select2/dist/css/select2.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "bootstrap";
 import "jquery";
 import "jquery-ui";
-import "select2";
-// import "nouislider";
-
-// import noUiSlider from "nouislider";
 
 import Aurelia, { DI, Registration, IContainer, IResolver } from "aurelia";
 import { App } from "./app";
@@ -18,11 +13,13 @@ import { App } from "./app";
 // import { SalaryRange } from "./components/common/salary-range/salary-range";
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
 import { DataTable } from "./components/common/data-table/data-table";
-import { SortIcon } from "./components/common/sort-icon/sort-icon";
 
 // Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
-import { FilterValueConverter, SortValueConverter } from './resources/value-converters/array';
+import {
+  FilterValueConverter,
+  SortValueConverter,
+} from "./resources/value-converters/array";
 
 // Register custom attributes
 import { TooltipCustomAttribute } from "./resources/custom-attributes/tooltip";
@@ -34,7 +31,6 @@ import { SeederService } from "./services/SeederService";
 
 const app = Aurelia.register(
   // SalaryRange,
-  SortIcon,
   SelectDropdown,
   DataTable,
   NumberFormatValueConverter,

@@ -1,11 +1,15 @@
-import { bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode, inject } from "aurelia";
 import { PropertyNameOrFunction } from "../../../custom_typings/common";
 import { Utility } from "../../../utilities/common";
+
+import "select2/dist/css/select2.min.css";
+import "select2";
 
 /**
  *
  * @url https://ilikekillnerds.com/2015/08/aurelia-custom-elements-custom-callback-events-tutorial/
  */
+@inject()
 export class SelectDropdown {
   @bindable({ mode: BindingMode.twoWay }) public value: any;
   @bindable({ mode: BindingMode.twoWay })
