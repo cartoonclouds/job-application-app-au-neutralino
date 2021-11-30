@@ -1,4 +1,5 @@
 <select class="form-select form-select-sm" multiple.bind="multiple">
+  <option></option>
   <option repeat.for="model of models" value.bind="getValue(model)">
     ${getLabel(model)}
   </option>

@@ -60,6 +60,8 @@ export class IconMenu {
   @bindable({ mode: BindingMode.toView }) disabled: boolean = false;
   @bindable({ mode: BindingMode.toView }) caret: boolean = false;
 
+  public static DIVIDER: MenuItemDivider = new MenuItemDivider();
+
   private menu = null;
   private static uniqueId = 0;
 

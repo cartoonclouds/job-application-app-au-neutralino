@@ -12,7 +12,7 @@
     <fieldset class="p-2 pt-4 actions-fieldset">
       <legend class="pt-0 fieldset-header">Actions</legend>
 
-      <data-table table-headers.bind="actionsTableHeaders" data-model.bind="jobApplication.actions">
+      <data-table class="actions-table" table-headers.bind="actionsTableHeaders" data-model.bind="jobApplication.actions">
         <template au-slot="row">
           <td>
             ${$host.item.createdAt.format("DD/mm/YYYY")}

@@ -7,7 +7,7 @@ import { JobApplicationRepository } from "../../../repositories/job-application"
 import { TabService } from "../../../services/TabService";
 import { UUIDService } from "../../../services/UUIDService";
 import { DataTableHeader } from "../../common/data-table/data-table";
-import { MenuItem } from "../../common/icon-menu/icon-menu";
+import { IconMenu, MenuItem } from "../../common/icon-menu/icon-menu";
 import { TabContent, TabGroup, TabHeader } from "../../common/tabs";
 import { JobApplicationTab } from "../job-application-tab/job-application-tab";
 
@@ -50,9 +50,24 @@ export class SummaryTab {
 
   public readonly menuItems = [
     new MenuItem({
-      displayName: "Open Job Application",
+      displayName: "Open",
       action: (jobApplication: JobApplication, event) => {
         this.openTab(jobApplication);
+        return true;
+      },
+    }),
+    new MenuItem({
+      displayName: "Require Follow-up",
+      action: (jobApplication: JobApplication, event) => {
+        jobApplication.requiresFollowup = !jobApplication.requiresFollowup;
+        return true;
+      },
+    }),
+    IconMenu.DIVIDER,
+    new MenuItem({
+      displayName: "Delete",
+      action: (jobApplication: JobApplication, event) => {
+        console.log("DELETE");
         return true;
       },
     }),
