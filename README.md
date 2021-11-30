@@ -15,6 +15,7 @@
 	* 5.2. [General](#General)
 	* 5.3. [Custom Attributes](#CustomAttributes-1)
 	* 5.4. [Value Convertors](#ValueConvertors-1)
+	* 5.5. [Binding Behaviours](#BindingBehaviours-1)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -105,6 +106,10 @@ animate-on-change="value.bind: applicationRepository.jobApplicationCount; durati
 - DateFormat
 - Unique
 - Joiner
+
+###  5.5. <a name='BindingBehaviours-1'></a>Binding Behaviours
+
+- NumberFormat
 
 ---
 

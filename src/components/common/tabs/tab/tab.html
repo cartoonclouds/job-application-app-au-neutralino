@@ -1,8 +1,8 @@
-<li class="tabs__tab ${selected ? 'tabs__tab--selected' : ''}">
-  <button if.bind="tabHeader.closeable" type="button" click.trigger="closeTab()"
-    class="btn-close text-danger tab_close_icon" aria-label="Close"></button>
+<li class="tabs__tab ${selected ? 'tabs__tab--selected' : ''}" click.trigger="tabAction($event)">
+  <button if.bind="tabHeader.closeable" type="button" class="btn-close text-danger tab_close_icon"
+    aria-label="Close"></button>
 
-  <a href="#${id}" class="tabs__tab__inner" click.trigger="showTab()" ellipsis>
+  <a href="#${id}" class="tabs__tab__inner ${tabHeader.class}" ellipsis>
     ${tabHeader.label}
   </a>
 </li>

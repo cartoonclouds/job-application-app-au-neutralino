@@ -1,14 +1,35 @@
-data-table {
-  display: block;
-  overflow: auto;
+:global {
+  data-table {
+    display: block;
+    overflow: auto;
 
-  table {
-    width: 100%;
-    table-layout: fixed;
-    background-color: transparent;
+    table {
+      width: 100%;
+      table-layout: fixed;
+      background-color: transparent;
 
-    .actions {
-      width: 100px;
+      tr {
+        &.selected {
+          background-color: rgb(170, 169, 169);
+          color: rgb(48, 48, 48);
+        }
+
+        &.empty-row {
+          // color: var(--foreground--text--secondary);
+          font-style: italic;
+
+          &:not(:first-of-type) {
+            display: none;
+          }
+        }
+
+        th {
+          &.actions {
+            width: 100px;
+            text-align: center;
+          }
+        }
+      }
     }
   }
 }

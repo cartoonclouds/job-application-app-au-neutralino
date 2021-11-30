@@ -23,3 +23,7 @@ export type Class<T> = new (...args: any[]) => T;
 export type SearchFunction = (item) => boolean;
 
 export type Comparefunction = (a: any, b: any) => -1 | 0 | 1;
+
+export type LeftMouseButton = 0;
+export type MiddleMouseButton = 1;
+export type RightMouseButton = 2;

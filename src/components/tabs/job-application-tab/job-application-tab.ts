@@ -1,7 +1,10 @@
-import { bindable, inject } from "aurelia";
-import { JobApplication } from "../../../models/JobApplication";
-import { DataTableHeader } from "../../common/data-table/data-table";
-import { Action } from "../../../models/Action";
+import { bindable, inject } from 'aurelia';
+
+import { Action } from '../../../models/Action';
+import { JobApplication } from '../../../models/JobApplication';
+import { DataTableHeader } from '../../common/data-table/data-table';
+import { MenuItem } from '../../common/icon-menu/icon-menu';
+
 @inject()
 export class JobApplicationTab {
   @bindable jobApplication: JobApplication = new JobApplication();
@@ -31,6 +34,17 @@ export class JobApplicationTab {
       class: "actions",
     }),
   ];
+
+  public readonly menuItems = [
+    new MenuItem({
+      displayName: "Open Action",
+      action: (action: Action, event) => {
+        console.log('OPEN ACTION', action);
+        return true;
+      },
+    }),
+  ];
+
 
   public activate(params?: { jobApplication?: JobApplication }) {
     if (params?.jobApplication) {

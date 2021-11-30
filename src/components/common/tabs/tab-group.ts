@@ -15,7 +15,7 @@ export class TabHeader {
       options = Object.assign(new TabHeader(), options);
 
       this.label = options.label;
-      this.tooltip = options.tooltip;
+      this.tooltip = options.tooltip || this.label;
       this.disabled = options.disabled;
       this.closeable = options.closeable;
       this.moveable = options.moveable;

@@ -1,3 +1,5 @@
+import { TabGroup, TabHeader, TabContent } from "./components/common/tabs";
+import { SummaryTab } from "./components/tabs/summary-tab/summary-tab";
 import {
   Action,
   Address,
@@ -10,9 +12,15 @@ import {
 } from "./models";
 import { SeederService } from "./services/SeederService";
 import { TabService } from "./services/TabService";
+import { UUIDService } from "./services/UUIDService";
 
+// https://github.com/Vheissu/aurelia-tabs
+// https://github.com/aurelia-plugins/aurelia-plugins-tabs
+// https://stackoverflow.com/questions/35799475/how-to-add-a-tab-or-other-ui-component-with-aurelia
+
+// https://docs.aurelia.io/getting-to-know-aurelia/components/component-lifecycles
 export class App {
-  public tabs = TabService.tabs();
+  public static tabList: TabGroup[] = [];
 
   constructor(
     private readonly tabService: TabService,
@@ -35,10 +43,23 @@ export class App {
     // console.log(Job.className, job.instanceName);
 
     // console.log(job.id, job.rate);
-    console.log(seederService.applications);
   }
 
   attached() {
-    this.tabService.openTab(this.tabs[0].id);
+    this.tabService.addTab(
+      new TabGroup(
+        UUIDService.generate(),
+        new TabHeader({
+          label: "Summary",
+          tooltip: "The dashboard of all job applications",
+          disabled: false,
+          closeable: false,
+          moveable: false,
+        }),
+        new TabContent({
+          viewModel: SummaryTab,
+        })
+      )
+    );
   }
 }

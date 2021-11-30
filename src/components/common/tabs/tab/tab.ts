@@ -1,6 +1,8 @@
-import { bindable, BindingMode, containerless, EventAggregator, inject } from "aurelia";
-import { TabHeader } from "../tab-group";
-import { TabService } from "../../../../services/TabService";
+import { bindable, BindingMode, containerless, inject } from 'aurelia';
+
+import { MouseButton } from '../../../../enums/common';
+import { TabService } from '../../../../services/TabService';
+import { TabHeader } from '../tab-group';
 
 @inject()
 @containerless
@@ -8,20 +10,19 @@ export class Tab {
   @bindable({ mode: BindingMode.oneTime }) id: string;
   @bindable({ mode: BindingMode.twoWay }) selected: boolean = false;
   @bindable({ mode: BindingMode.twoWay }) tabHeader: TabHeader;
-  @bindable({ mode: BindingMode.oneTime })
-  onClick: () => any = this.showTab;
 
   constructor(private readonly tabService: TabService) {}
 
-  public closeTab() {
-    this.tabService.removeTab(this.id);
+  public tabAction(event) {
+    const clickedElement: HTMLElement = event.target;
 
-    return true;
-  }
+    if (
+      clickedElement.classList.contains("btn-close") ||
+      event.button === MouseButton.Middle
+    ) {
+      return this.tabService.closeTab(this.id);
+    }
 
-  public showTab() {
-    this.tabService.openTab(this.id);
-
-    return true;
+    return this.tabService.showTab(this.id);
   }
 }

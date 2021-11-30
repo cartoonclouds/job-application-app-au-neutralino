@@ -1,0 +1,6 @@
+{
+  "search.exclude": {
+    "neutralino.js": true,
+    "package-lock.json": true
+  }
+}

@@ -27,7 +27,8 @@
 <fieldset class="p-2 pt-4">
   <legend class="pt-0 fieldset-header">Job Applications</legend>
 
-  <data-table table-headers.bind="jobApplicationTableHeaders" data-model.bind="jobApplications">
+  <data-table class="job-applications-table" table-headers.bind="jobApplicationTableHeaders" data-model.bind="jobApplications"
+    on-dbl-click.bind="openTab.bind($this)">
     <template au-slot="row">
       <td>
         ${$host.item.createdAt.format("DD/mm/YYYY")}
@@ -47,8 +48,10 @@
         <i
           class="fas fa-${$host.item.requiresFollowup ? 'check' : 'times'}-circle text-${$host.item.requiresFollowup ? 'success' : 'danger'}"></i>
       </td>
-      <td>
-        ellipsis-menu
+      <td class="actions">
+        <icon-menu items.bind="menuItems" data-model.bind="$host.item">
+          <template au-slot><i class="far fa-ellipsis-h"></i></template>
+        </icon-menu>
       </td>
     </template>
   </data-table>

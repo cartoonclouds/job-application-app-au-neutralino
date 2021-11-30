@@ -1,9 +1,16 @@
 import { inject } from "aurelia";
+
 import { JobApplication } from "../../../models";
 import { ActionRepository } from "../../../repositories/action";
 import { CompanyRepository } from "../../../repositories/company";
 import { JobApplicationRepository } from "../../../repositories/job-application";
+import { TabService } from "../../../services/TabService";
+import { UUIDService } from "../../../services/UUIDService";
 import { DataTableHeader } from "../../common/data-table/data-table";
+import { MenuItem } from "../../common/icon-menu/icon-menu";
+import { TabContent, TabGroup, TabHeader } from "../../common/tabs";
+import { JobApplicationTab } from "../job-application-tab/job-application-tab";
+
 @inject()
 export class SummaryTab {
   public readonly jobApplicationTableHeaders = [
@@ -31,24 +38,46 @@ export class SummaryTab {
       displayName: "Requires Follow-up",
       propertyGetter: (application: JobApplication) =>
         application.requiresFollowup ? "1" : "0",
-        class: "text-center",
+      class: "text-center",
     }),
 
     new DataTableHeader({
       isSortable: false,
       isSearchable: false,
-      class: "actions",
+      class: "actions text-right",
+    }),
+  ];
+
+  public readonly menuItems = [
+    new MenuItem({
+      displayName: "Open Job Application",
+      action: (jobApplication: JobApplication, event) => {
+        this.openTab(jobApplication);
+        return true;
+      },
     }),
   ];
 
   constructor(
     public readonly applicationRepository: JobApplicationRepository,
     public readonly actionsRepository: ActionRepository,
-    public readonly companyRepository: CompanyRepository
+    public readonly companyRepository: CompanyRepository,
+    private readonly tabService: TabService
   ) {}
 
-  public attached() {
-    console.log(this.jobApplications);
+  public openTab(jobApplication: JobApplication) {
+    return this.tabService.addTab(
+      new TabGroup(
+        UUIDService.generate(),
+        new TabHeader({
+          label: jobApplication.job.title,
+        }),
+        new TabContent({
+          viewModel: JobApplicationTab,
+          model: { jobApplication },
+        })
+      )
+    );
   }
 
   public get applicationsRequiringFollowup(): number {

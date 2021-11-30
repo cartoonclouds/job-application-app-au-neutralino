@@ -6,7 +6,7 @@ import "select2/dist/css/select2.min.css";
 import "select2";
 
 /**
- *
+ *https://harvesthq.github.io/chosen/
  * @url https://ilikekillnerds.com/2015/08/aurelia-custom-elements-custom-callback-events-tutorial/
  */
 @inject()

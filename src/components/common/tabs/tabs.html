@@ -4,8 +4,9 @@
   <tab repeat.for="tab of tabs" id.bind="tab.id" tab-header.bind="tab.tabHeader" selected.bind="tab.selected"></tab>
 
   <li if.bind="showNewTab" class="tabs__tab tabs__tab_new">
-    <a href="#" class="tabs__tab__inner" click.trigger="tabService.addJobApplicationTab()">
+    <a href="#" class="tabs__tab__inner" click.trigger="tabService.addTab(null, true)">
       <span class="tab_new_icon" role="presentation">Add Tab</span>
     </a>
   </li>
 </ul>
+  

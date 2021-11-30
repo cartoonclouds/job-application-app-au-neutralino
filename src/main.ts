@@ -13,6 +13,7 @@ import { App } from "./app";
 // import { SalaryRange } from "./components/common/salary-range/salary-range";
 import { SelectDropdown } from "./components/common/select-dropdown/select-dropdown";
 import { DataTable } from "./components/common/data-table/data-table";
+import { IconMenu } from "./components/common/icon-menu/icon-menu";
 
 // Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
@@ -31,6 +32,7 @@ import { SeederService } from "./services/SeederService";
 
 const app = Aurelia.register(
   // SalaryRange,
+  IconMenu,
   SelectDropdown,
   DataTable,
   NumberFormatValueConverter,

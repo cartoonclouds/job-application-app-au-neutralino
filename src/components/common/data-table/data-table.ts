@@ -1,11 +1,4 @@
-import {
-  bindable,
-  BindingMode,
-  EventAggregator,
-  inject,
-  INode,
-  IPlatform,
-} from "aurelia";
+import { bindable, BindingMode, EventAggregator, inject } from "aurelia";
 import * as _ from "underscore";
 
 import { FilterValueConverter } from "../../../resources/value-converters/array";
@@ -55,6 +48,7 @@ export class DataTable {
   @bindable({ mode: BindingMode.twoWay }) selectedRowModel: any;
   @bindable({ mode: BindingMode.toView }) selectable: boolean = true;
   @bindable({ mode: BindingMode.oneTime }) onSelect = (i, event?) => true;
+  @bindable({ mode: BindingMode.oneTime }) onDblClick = (i, event?) => true;
 
   @bindable({ mode: BindingMode.twoWay }) sortAscending: boolean = true;
   @bindable({ mode: BindingMode.toView }) sortingHeader: DataTableHeader;
@@ -66,6 +60,7 @@ export class DataTable {
 
   @bindable({ mode: BindingMode.toView }) tableClass = "";
   @bindable({ mode: BindingMode.toView }) tableBodyRowClass = "";
+  @bindable({ mode: BindingMode.toView }) ignoreEventClass = "actions";
 
   @bindable({ mode: BindingMode.toView }) hoverable: boolean = true;
   @bindable({ mode: BindingMode.oneTime }) showEmptyState: boolean = false;
@@ -88,8 +83,11 @@ export class DataTable {
     this.search = "";
   }
 
-  public selectRow(rowModel, event) {
-    if (!this.onSelect) {
+  public selectRow(rowModel, event: MouseEvent | KeyboardEvent) {
+    if (
+      !this.onSelect ||
+      (event.target as HTMLElement).classList.contains(this.ignoreEventClass)
+    ) {
       return;
     }
 
@@ -98,6 +96,21 @@ export class DataTable {
     }
 
     return this.onSelect(rowModel, event);
+  }
+
+  public dblClickRow(rowModel, event: MouseEvent) {
+    if (
+      !this.onDblClick ||
+      (event.target as HTMLElement).classList.contains(this.ignoreEventClass)
+    ) {
+      return;
+    }
+
+    if (this.selectedRowModel === rowModel) {
+      return;
+    }
+
+    return this.onDblClick(rowModel, event);
   }
 
   public keyboardHandler(rowModel, event: KeyboardEvent) {

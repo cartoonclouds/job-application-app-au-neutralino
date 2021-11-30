@@ -94,7 +94,7 @@ interface ITooltipOptions {
   customClass: string | (() => string);
   sanitize: boolean;
   sanitizeFn: null | ((unsafeHtml: string) => string);
-  allowList: {[tag: string]: []};
+  allowList: { [tag: string]: [] };
   popperConfig: null | object | (({}) => {});
 }
 

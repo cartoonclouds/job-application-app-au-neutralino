@@ -6,131 +6,128 @@ import {
   TabHeader,
 } from "../components/common/tabs/tab-group";
 import { JobApplicationTab } from "../components/tabs/job-application-tab/job-application-tab";
-import { SummaryTab } from "../components/tabs/summary-tab/summary-tab";
-import { JobApplicationRepository } from "../repositories/job-application";
-import { UUIDService } from "../services/UUIDService";
+import { UUIDService } from "./UUIDService";
 
 /**
  * Service to control tabs and tab section visibility.
  */
 @inject()
 export class TabService {
-  public static tabList = [];
-  private static openApplicationIdx = [0];
+  public tabList: TabGroup[] = [];
 
-  constructor(
-    public readonly jobApplicationRepository: JobApplicationRepository
-  ) {
-    TabService.tabList = [
-      new TabGroup(
+  /**
+   * Returns the selected tab.
+   *
+   * @return {TabGroup}
+   */
+  public get selectedTab(): TabGroup | undefined {
+    return this.tabList.find((tab: TabGroup) => tab.selected);
+  }
+
+  /**
+   * Returns the entire list of tabs.
+   *
+   * @returns {TabGroup[]}
+   */
+  public tabs() {
+    return this.tabList;
+  }
+
+  /**
+   * Finds a tab by it's ID.
+   *
+   * @param {string} id
+   * @returns {TabGroup}
+   */
+  public tab(id: string) {
+    return this.tabList.find((t) => t.id === id);
+  }
+
+  /**
+   * Returns the count of all tabs.
+   *
+   * @return {number}
+   */
+  public tabCount(): number {
+    return this.tabList.length;
+  }
+
+  /**
+   * Adds a tab to the list of tabs.
+   *
+   * Note if no tab is passed a new, empty one is created.
+   *
+   * @param {TabGroup | undefined} tab the tab group to add
+   * @param {boolean} show determines whether the newly added tab should be shown
+   * @return {TabGroup} the newly added tab
+   */
+  public addTab(tab?: TabGroup, show: boolean = true): TabGroup {
+    if (!tab) {
+      tab = new TabGroup(
         UUIDService.generate(),
         new TabHeader({
-          label: "Summary",
-          tooltip: "Tooltip for tab 1",
-          disabled: false,
-          closeable: false,
-          moveable: false,
-        }),
-        new TabContent({
-          viewModel: SummaryTab,
-          model: {
-            message2:
-              "Nunc tincidunt! Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.",
-          },
-        })
-      ),
-
-      new TabGroup(
-        UUIDService.generate(),
-        new TabHeader({
-          label: "New Job Application",
-          tooltip: "Tooltip for tab 2",
+          label: `New Job Application ${this.tabCount()}`,
         }),
         new TabContent({
           viewModel: JobApplicationTab,
-          model: {
-            jobApplication: jobApplicationRepository.jobApplications()[0],
-          },
         })
-      ),
-    ];
+      );
+    }
+
+    this.tabList.push(tab);
+
+    if (show) {
+      this.showTab(tab.id);
+    }
+
+    return tab;
   }
 
-  public removeTab(tabId: string) {
-    const tabIdx = TabService.tabList.findIndex(
-      (tab: TabGroup) => tab.id === tabId
-    );
+  /**
+   * Makes a tab visible.
+   *
+   * @param {string} tabId ID of the tab to make visible
+   */
+  public showTab(tabId: string) {
+    const tab = this.tab(tabId);
+
+    let section = document.getElementById(`_tabbed-section-${tabId}`);
+
+    if (section) {
+      this.tabList.forEach((tab: TabGroup) => (tab.selected = false));
+
+      tab.selected = true;
+    }
+  }
+
+  /**
+   * Closes (removes) a tab.
+   *
+   * @param {string} tabId ID of the tab to close
+   */
+  public closeTab(tabId: string) {
+    const tab: TabGroup = this.tab(tabId);
+
+    if (!tab.tabHeader.closeable) {
+      return;
+    }
+
+    const tabIdx = this.tabList.findIndex((tab: TabGroup) => tab.id === tabId);
 
     if (tabIdx >= 0) {
       // open previous tab
       if (this.selectedTab.id === tabId) {
-        const previousTab = TabService.tabList[Math.max(0, tabIdx - 1)];
+        const previousTab = this.tabList[Math.max(0, tabIdx - 1)];
 
-        this.openTab(previousTab.id);
+        this.showTab(previousTab.id);
       }
 
-      TabService.tabList.splice(tabIdx, 1);
+      this.tabList.splice(tabIdx, 1);
     }
 
     console.assert(
       tabIdx >= 0,
       `Tab (${tabId}) with index ${tabIdx} not found`
     );
-  }
-
-  public get selectedTab(): TabGroup | undefined {
-    return TabService.tabList.find((tab: TabGroup) => tab.selected);
-  }
-
-  public openTab(tabId: string) {
-    const tab = TabService.tab(tabId);
-    let section = document.getElementById(`_tabbed-section-${tabId}`);
-
-    if (section) {
-      TabService.tabList.forEach((tab: TabGroup) => (tab.selected = false));
-
-      tab.selected = true;
-    }
-  }
-
-  public static tabs() {
-    return this.tabList;
-  }
-
-  public static tab(id: string) {
-    return this.tabList.find((t) => t.id === id);
-  }
-
-  public static tabCount(): number {
-    return this.tabList.length;
-  }
-
-  public addJobApplicationTab() {
-    do {
-      var newIdx = Math.floor(Math.random() * 30 + 1);
-    } while (TabService.openApplicationIdx.includes(newIdx));
-
-    TabService.openApplicationIdx.push(newIdx);
-
-    const jobApplication =
-      this.jobApplicationRepository.jobApplications()[newIdx];
-
-    const newTab = new TabGroup(
-      UUIDService.generate(),
-      new TabHeader({
-        label: `Header label for tab ${TabService.tabCount()}`,
-        tooltip: `Tooltip for tab ${TabService.tabCount()}`,
-      }),
-      new TabContent({
-        viewModel: JobApplicationTab,
-        model: {
-          jobApplication,
-        },
-      })
-    );
-
-    TabService.tabList.push(newTab);
-
-    this.openTab(newTab.id);
   }
 }
