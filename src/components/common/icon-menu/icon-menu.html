@@ -1,10 +1,11 @@
-<div class="btn-group ${dropDirection}">
-  <button if.bind="button" type="button" class="btn ${btnClass} dropdown-toggle ${!caret ? 'no-caret' : ''}"
-    id.bind="id" data-bs-toggle="dropdown" disabled.bind="disabled" aria-expanded="true" aria-haspopup="true">
+<div class="btn-group ${dropDirection} ${fillSpace ? 'fill-space' : ''}">
+  <button if.bind="button" type="button"
+    class="btn ${btnClass} dropdown-toggle ${!caret ? 'no-caret' : ''} ${fillSpace ? 'fill-space' : ''}" id.bind="id"
+    data-bs-toggle="dropdown" disabled.bind="disabled" aria-expanded="true" aria-haspopup="true">
     <au-slot></au-slot>
   </button>
-  <a else href="#" class="dropdown-toggle no-decorate ${!caret ? 'no-caret' : ''}" disabled.bind="disabled" id.bind="id"
-    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <a else href="#" class="dropdown-toggle no-decorate ${!caret ? 'no-caret' : ''} ${fillSpace ? 'fill-space' : ''}"
+    disabled.bind="disabled" id.bind="id" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <au-slot></au-slot>
   </a>
 
@@ -12,11 +13,14 @@
     <li repeat.for="item of items" switch.bind="item.type">
 
       <h6 case="MenuItemHeader" class="dropdown-header ${class}" click.trigger="onItemSelect(item, $event)">
-        ${item.displayName}</h6>
+        <span if.bind="item.icon" class="menu-item-icon"><i class.bind="item.icon"></i></span> ${item.displayName}
+      </h6>
 
       <a case="MenuItem" class="dropdown-item ${class}" href="#" disabled.bind="item.disabled"
         aria-disabled.bind="item.disabled" tabindex="${item.disabled ? -1 : 1}"
-        click.trigger="onItemSelect(item, $event)">${item.displayName}</a>
+        click.trigger="onItemSelect(item, $event)">
+        <span if.bind="item.icon" class="menu-item-icon"><i class.bind="item.icon"></i></span> ${item.displayName}
+      </a>
 
       <hr case="MenuItemDivider" class="dropdown-divider">
 

@@ -22,6 +22,6 @@ export class ObjectUtility {
    * @returns
    */
   public static joinIntoNew(obj1, obj2): object {
-    return Object.assign({}, ...arguments);
+    return Object.assign({}, arguments);
   }
 }

@@ -4,10 +4,12 @@ import { Action } from '../../../models/Action';
 import { JobApplication } from '../../../models/JobApplication';
 import { DataTableHeader } from '../../common/data-table/data-table';
 import { MenuItem } from '../../common/icon-menu/icon-menu';
+import { observable } from '@aurelia/runtime';
 
 @inject()
 export class JobApplicationTab {
-  @bindable jobApplication: JobApplication = new JobApplication();
+  @observable public searchText: string;
+  @bindable public jobApplication: JobApplication = new JobApplication();
 
   public readonly actionsTableHeaders = [
     new DataTableHeader({

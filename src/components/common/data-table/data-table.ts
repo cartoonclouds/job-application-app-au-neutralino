@@ -1,4 +1,10 @@
-import { bindable, BindingMode, EventAggregator, inject } from "aurelia";
+import {
+  bindable,
+  BindingMode,
+  EventAggregator,
+  inject,
+  ISignaler,
+} from "aurelia";
 import * as _ from "underscore";
 
 import { FilterValueConverter } from "../../../resources/value-converters/array";
@@ -72,7 +78,8 @@ export class DataTable {
     private readonly element: Element,
     private readonly eventAggregator: EventAggregator,
     private readonly filterValueConverter: FilterValueConverter
-  ) {}
+  ) // @ISignaler private readonly signaler: ISignaler
+  {}
 
   public binding() {
     this.headersChanged([], this.tableHeaders);
@@ -122,11 +129,15 @@ export class DataTable {
   }
 
   public dataModelChanged(newValue, oldValue) {
-    this.eventAggregator.publish("update-search");
+    // this.signaler.dispatchSignal("update-search");
   }
 
   public searchChanged(newValue) {
-    this.eventAggregator.publish("update-search");
+    console.log("search changed" + newValue, `new value: ${this.search}`);
+
+    this.search = newValue;
+
+    // this.signaler.dispatchSignal("update-search");
   }
 
   public scrollTop() {
@@ -145,7 +156,7 @@ export class DataTable {
       this.sortingHeader = newSortingHeader;
     }
 
-    this.eventAggregator.publish("update-search");
+    // this.signaler.dispatchSignal("update-search");
   }
 
   public filterOn(rowModel: any) {
@@ -169,15 +180,26 @@ export class DataTable {
   }
 
   public searchOn(rowModel: any) {
+    console.log("onSearch");
     if (!this.search) {
       return true;
     }
+
+    console.log("search " + this.search);
 
     if (this.searchFunction) {
       return this.searchFunction(rowModel, this.search);
     }
 
+    console.log("no searchFunction");
+
     return _.some(this.tableHeaders, (header: DataTableHeader) => {
+      console.log(
+        _.isFunction(header.propertyGetter),
+        header.isSearchable,
+        this.search.toLocaleLowerCase()
+      );
+
       if (!_.isFunction(header.propertyGetter) || !header.isSearchable) {
         // skip this column
         return false;
@@ -237,14 +259,6 @@ export class DataTable {
   }
 
   private filtersChanged(filters: DataTableFilter[]) {
-    this.eventAggregator.publish("update-search");
+    // this.signaler.dispatchSignal("update-search");
   }
 }
-
-/**
- * @TODO
- * <sort-icon ascending.bind="sortAscending"></sort-icon>
- * filter b/c
- * sort b/c
- *
- */

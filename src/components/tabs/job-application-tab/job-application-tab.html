@@ -12,7 +12,14 @@
     <fieldset class="p-2 pt-4 actions-fieldset">
       <legend class="pt-0 fieldset-header">Actions</legend>
 
-      <data-table class="actions-table" table-headers.bind="actionsTableHeaders" data-model.bind="jobApplication.actions">
+      <div class="search-row">
+        <button type="button" class="btn btn-outline-secondary" title="Create new action"><i class="fa fa-file"></i>
+          New</button>
+        <search-input class="search-input" value.bind="searchText"></search-input>
+      </div>
+
+      <data-table class="actions-table" table-headers.bind="actionsTableHeaders"
+        data-model.bind="jobApplication.actions" search.bind="searchText">
         <template au-slot="row">
           <td>
             ${$host.item.createdAt.format("DD/mm/YYYY")}
@@ -29,7 +36,7 @@
           </td>
           <td class="actions">
             <icon-menu items.bind="menuItems" data-model.bind="$host.item">
-              <template au-slot><i class="far fa-ellipsis-h"></i></template>
+              <template au-slot><i class="far fa-ellipsis-v"></i></template>
             </icon-menu>
           </td>
         </template>

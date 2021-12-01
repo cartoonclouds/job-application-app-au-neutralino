@@ -1,20 +1,21 @@
-import 'select2';
-import 'select2/dist/css/select2.min.css';
+import "select2";
+import "select2/dist/css/select2.min.css";
 
-import { bindable, BindingMode, inject } from 'aurelia';
+import { bindable, BindingMode, inject } from "aurelia";
 
-import { PropertyNameOrFunction } from '../../../custom_typings/common';
-import { Utility } from '../../../utilities/common';
+import { PropertyNameOrFunction } from "../../../custom_typings/common";
+import { Utility } from "../../../utilities/common";
+import { ObjectUtility } from "../../../utilities/object-utility";
 
 /**
  *
  * @url https://ilikekillnerds.com/2015/08/aurelia-custom-elements-custom-callback-events-tutorial/
+ * @url https://github.com/Kla3mus/select24aurelia/blob/master/select2.ts
  */
 @inject()
 export class SelectDropdown {
-  @bindable({ mode: BindingMode.twoWay }) public value: any;
-  @bindable({ mode: BindingMode.twoWay })
-  public models: any[] = [];
+  @bindable({ mode: BindingMode.toView }) public name: string;
+  @bindable({ mode: BindingMode.twoWay }) public models: any[] = [];
 
   @bindable({ mode: BindingMode.oneTime }) public key?: PropertyNameOrFunction;
   @bindable({ mode: BindingMode.oneTime })
@@ -22,59 +23,91 @@ export class SelectDropdown {
 
   @bindable({ mode: BindingMode.oneTime }) public multiple: boolean = false;
   @bindable({ mode: BindingMode.oneTime }) public showSearch: boolean = false;
+  @bindable({ mode: BindingMode.oneTime }) public placeholder: string = "";
+  @bindable({ mode: BindingMode.toView }) public disabled: boolean = false;
+  @bindable({ mode: BindingMode.toView }) public options: object = {};
 
-  // https://stackoverflow.com/questions/50011443/tslint-how-to-disable-error-somevariable-is-declared-but-its-value-is-never-rea
+  @bindable({ mode: BindingMode.twoWay }) selected: any | any[];
+
   private $select: JQuery<Element>;
+  private static uniqueId = 0;
 
-  constructor(private readonly element: Element) {
-    this.$select = $(this.element);
+  constructor(public readonly element: Element) {}
+
+  // https://select2.org/searching#multi-select
+  // https://github.com/select2/select2/issues/4797
+  private init() {
+    this.$select.select2(this.select2Options);
+
+    this.$select.on(
+      "select2:select",
+      (event) => (this.selected = (event.params.data as any).model)
+    );
   }
 
-  private initSelect2() {
-    this.$select.select2({
-      minimumResultsForSearch: this.showSearch ? undefined : -1,
-    });
+  protected get select2Options() {
+    return Object.assign(
+      {},
+      {
+        minimumResultsForSearch: this.showSearch ? undefined : -1,
+        placeholder: this.placeholder,
+        width: "100%",
+        disabled: this.disabled,
+        data: this.selectData,
+      },
+      this.options
+    );
+  }
 
-    // matcher: this.matcher, // fix incase not passed
-    // console.log(this.$select);
-    // this.$select.select2({
-    // placeholder: this.placeholder,
-    // allowClear: this.allowClear,
-    // closeOnSelect: this.closeOnSelect,
-    // disabled: this.disabled,
-    // minimumInputLength: this.hideSearchBox ? -1 : this.minimumInputLength, // https://select2.org/searching#limiting-display-of-the-search-box-to-large-result-sets
-    // maximumInputLength: this.maximumInputLength,
-    // sorter: this.sorter,
-    // templateResult:,
-    // templateSelection
-    // });
+  public get selectData() {
+    return this.models.map((m) => {
+      return {
+        id: this.getValue(m),
+        text: this.getLabel(m),
+        selected: this.isSelected(m),
+        model: m,
+      };
+    });
+  }
+
+  protected modelsChanged() {
+    this.init();
+  }
+
+  protected disabledChanged() {
+    this.init();
+  }
+
+  protected select2OptionsChanged() {
+    this.init();
   }
 
   protected attached() {
     this.$select = $(this.element).find("select");
-    this.initSelect2();
 
-    // this.select2Setup();
-    // this.$dropdown = $(this.dropdown);
-    // this.$select = this.$dropdown.find("select");
-    // this.$dropdown.on("show.bs.dropdown", this.showHandler);
-    // this.$dropdown.on("hide.bs.dropdown", this.hideHandler);
+    this.init();
   }
 
   protected detached() {
     // release memory
-    this.$select.select2("destroy");
-    this.$select.off("select2:select");
-    this.$select = null;
-
-    // this.$dropdown.off("show.bs.dropdown", this.showHandler);
+    if (this.$select?.select2()) {
+      this.$select.off("select2:select");
+      this.$select.select2("destroy");
+      this.$select = null;
+    }
   }
 
-  private getValue(item: any) {
+  public binding() {
+    if (this.name == null || this.name === "") {
+      this.name = `select-dropdown-${SelectDropdown.uniqueId++}`;
+    }
+  }
+
+  public getValue(item: any) {
     return this.getValueFromKey(item, this.key);
   }
 
-  private getLabel(item: any) {
+  public getLabel(item: any) {
     return this.getValueFromKey(item, this.labelKey);
   }
 
@@ -83,5 +116,9 @@ export class SelectDropdown {
       return item;
     }
     return Utility.getValueFromPropertyNameOrFunction(item, key);
+  }
+
+  public isSelected(model): boolean {
+    return this.getValue(model) == this.getValue(this.selected);
   }
 }

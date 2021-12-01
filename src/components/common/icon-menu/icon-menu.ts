@@ -7,7 +7,7 @@ export class MenuItem {
   public type = MenuItem.type;
 
   public displayName: string;
-  public icon: string = "";
+  public icon?: string = null;
   public class: string = "";
   public action = (d, event?) => true;
   public disabled: boolean = false;
@@ -60,6 +60,8 @@ export class IconMenu {
   @bindable({ mode: BindingMode.toView }) disabled: boolean = false;
   @bindable({ mode: BindingMode.toView }) caret: boolean = false;
 
+  @bindable({ mode: BindingMode.oneTime }) fillSpace: boolean = true;
+
   public static DIVIDER: MenuItemDivider = new MenuItemDivider();
 
   private menu = null;
@@ -68,7 +70,11 @@ export class IconMenu {
   constructor(private readonly element: HTMLElement) {}
 
   public attached() {
-    this.initMenu();
+    this.init();
+
+    if (this.fillSpace) {
+      this.element.classList.add("fill-space");
+    }
   }
 
   public detached() {
@@ -83,7 +89,7 @@ export class IconMenu {
     }
   }
 
-  private initMenu() {
+  private init() {
     this.menu = new bootstrap.Dropdown(
       this.element.querySelector(".dropdown-toggle")
     );

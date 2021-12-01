@@ -124,7 +124,7 @@ export class TooltipCustomAttribute {
   constructor(private readonly element: HTMLElement) {}
 
   public attached() {
-    this.initTooltip();
+    this.init();
   }
 
   public detached() {
@@ -132,7 +132,7 @@ export class TooltipCustomAttribute {
     this.tooltip = null;
   }
 
-  private initTooltip() {
+  private init() {
     this.tooltip?.dispose();
 
     if (this.content) {
@@ -145,6 +145,6 @@ export class TooltipCustomAttribute {
   }
 
   public propertyChanged(name, newValue, oldValue) {
-    this.initTooltip();
+    this.init();
   }
 }

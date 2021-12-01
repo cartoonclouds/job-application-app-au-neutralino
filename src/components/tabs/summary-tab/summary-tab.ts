@@ -10,9 +10,12 @@ import { DataTableHeader } from "../../common/data-table/data-table";
 import { IconMenu, MenuItem } from "../../common/icon-menu/icon-menu";
 import { TabContent, TabGroup, TabHeader } from "../../common/tabs";
 import { JobApplicationTab } from "../job-application-tab/job-application-tab";
+import { observable } from '@aurelia/runtime';
 
 @inject()
 export class SummaryTab {
+  @observable public searchText: string;
+
   public readonly jobApplicationTableHeaders = [
     new DataTableHeader({
       displayName: "Created",
@@ -51,6 +54,7 @@ export class SummaryTab {
   public readonly menuItems = [
     new MenuItem({
       displayName: "Open",
+      icon: "fas fa-folder-open",
       action: (jobApplication: JobApplication, event) => {
         this.openTab(jobApplication);
         return true;
@@ -58,6 +62,7 @@ export class SummaryTab {
     }),
     new MenuItem({
       displayName: "Require Follow-up",
+      icon: "fab fa-searchengin",
       action: (jobApplication: JobApplication, event) => {
         jobApplication.requiresFollowup = !jobApplication.requiresFollowup;
         return true;
@@ -66,6 +71,7 @@ export class SummaryTab {
     IconMenu.DIVIDER,
     new MenuItem({
       displayName: "Delete",
+      icon: "fas fa-trash-alt",
       action: (jobApplication: JobApplication, event) => {
         console.log("DELETE");
         return true;
@@ -80,12 +86,13 @@ export class SummaryTab {
     private readonly tabService: TabService
   ) {}
 
+
   public openTab(jobApplication: JobApplication) {
     return this.tabService.addTab(
       new TabGroup(
         UUIDService.generate(),
         new TabHeader({
-          label: jobApplication.job.title,
+          label: jobApplication.job.title ?? `${jobApplication.job.profession}, ${jobApplication.company.name}`,
         }),
         new TabContent({
           viewModel: JobApplicationTab,

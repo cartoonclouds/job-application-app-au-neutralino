@@ -1,0 +1,15 @@
+<div
+  class="search-container ${alignRight ? 'right-align' : ''} ${hasFocus ? 'focus' : ''} ${clickIconToToggle ? 'click-toggle' : ''} ${border ? '' : 'no-border'}">
+  <label if.bind="showPrefixIcon" for="${inputId}" class="search-icon search-label" click.trigger="openSearch($event)">
+    <i class="fa fa-${prefixIconType}" purpose="semantic"></i>
+    <span class="sr-only">${labelText}</span>
+  </label>
+
+  <input id="${inputId}" type="search" readonly.bind="readonly" disabled.bind="disabled"
+    placeholder="${placeholderText}"
+    class="input-search search form-control form-control-sm ${showPrefixIcon ? 'show-prefix-icon' : ''} ${showInput ? 'visible' : ''}"
+    value.bind="value & debounce:500" ref="input" />
+  <button if.bind="value" class="search-icon search-clear" click.trigger="clearSearch($event)">
+    <i class="fa fa-times"></i>
+  </button>
+</div>

@@ -8,8 +8,8 @@
   <tabs tabs.bind="tabService.tabs()"></tabs>
   <!-- <div class="status-bar">status bar</div> -->
   <!-- <div class="tab-sections"> -->
-    <tab-section repeat.for="tab of tabService.tabs()" selected.bind="tab.selected" section.bind="tab.id"
-      view-model.bind="tab.viewModel" model.bind="tab.model">
-    </tab-section>
+  <tab-section repeat.for="tab of tabService.tabs()" selected.bind="tab.selected" section.bind="tab.id"
+    view-model.bind="tab.viewModel" model.bind="tab.model">
+  </tab-section>
   <!-- </div> -->
 </main>

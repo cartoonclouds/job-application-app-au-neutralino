@@ -20,8 +20,6 @@ import { UUIDService } from "./services/UUIDService";
 
 // https://docs.aurelia.io/getting-to-know-aurelia/components/component-lifecycles
 export class App {
-  public static tabList: TabGroup[] = [];
-
   constructor(
     private readonly tabService: TabService,
     public readonly seederService: SeederService
@@ -50,7 +48,7 @@ export class App {
       new TabGroup(
         UUIDService.generate(),
         new TabHeader({
-          label: "Summary",
+          label: "Job Application Summary",
           tooltip: "The dashboard of all job applications",
           disabled: false,
           closeable: false,
@@ -61,5 +59,7 @@ export class App {
         })
       )
     );
+
+    this.tabService.addTab();
   }
 }

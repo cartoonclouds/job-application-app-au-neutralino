@@ -1,0 +1,94 @@
+:global {
+  [pseudo="-webkit-search-cancel-button"] {
+    display: none !important;
+  }
+
+  search-input {
+    display: block;
+  }
+
+  .search-container {
+    position: relative;
+
+    .search-icon {
+      color: #363636;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      width: 24px;
+      z-index: 99;
+    }
+
+    .search-label {
+      left: 1px;
+    }
+
+    .search-clear {
+      right: 1px;
+    }
+
+    input.search {
+      box-shadow: none;
+      width: 100%;
+
+      &.show-prefix-icon {
+        padding-left: 24px;
+      }
+
+      &.no-border {
+        border: none;
+        background-color: transparent;
+      }
+
+      &:focus,
+      &.visible {
+        width: 100%;
+      }
+
+      &[readonly] {
+        background-color: #fff;
+        cursor: pointer;
+      }
+    }
+
+    &.right-align {
+      .search-label {
+        right: 1px;
+      }
+
+      /* do not show clear button when right aligned */
+      .search-clear {
+        display: none;
+      }
+
+      input.search {
+        text-align: right;
+      }
+    }
+
+    &.focus {
+      .search-label {
+        color: rgb(65, 65, 124);
+      }
+    }
+
+    &.click-toggle {
+      .search {
+        width: 0px;
+      }
+
+      .search-label {
+        width: 100%;
+      }
+
+      &.focus {
+        .search-label {
+          width: auto;
+        }
+      }
+    }
+  }
+}

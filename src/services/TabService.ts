@@ -91,6 +91,10 @@ export class TabService {
   public showTab(tabId: string) {
     const tab = this.tab(tabId);
 
+    if (!tab) {
+      throw Error(`Unknown tab ${tabId}`);
+    }
+
     let section = document.getElementById(`_tabbed-section-${tabId}`);
 
     if (section) {
