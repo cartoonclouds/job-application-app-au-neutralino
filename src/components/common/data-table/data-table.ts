@@ -77,9 +77,8 @@ export class DataTable {
   constructor(
     private readonly element: Element,
     private readonly eventAggregator: EventAggregator,
-    private readonly filterValueConverter: FilterValueConverter
-  ) // @ISignaler private readonly signaler: ISignaler
-  {}
+    private readonly filterValueConverter: FilterValueConverter // @ISignaler private readonly signaler: ISignaler
+  ) {}
 
   public binding() {
     this.headersChanged([], this.tableHeaders);

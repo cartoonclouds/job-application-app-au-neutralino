@@ -31,10 +31,15 @@ export class SalaryRange {
     this.slider = noUiSlider.create(this.element, this.options);
 
     // update range on slider change
-    // this.slider.on(this.range =)
+    this.slider.on(
+      "update",
+      (range) =>
+        (this.range = { start: Number(range[0]), end: Number(range[1]) })
+    );
   }
 
   public detached() {
+    this.slider.off("update");
     this.slider?.destroy();
     this.slider = null;
   }

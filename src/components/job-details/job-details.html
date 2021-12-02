@@ -18,10 +18,12 @@
         placeholder="Select an employment type"></select-dropdown>
     </div>
 
+    ${job.closingDate.toISOString()}
+
     <div class="row mb-2">
       <label for="closingDate" class="form-label form-label-sm text-muted">Closing
         Date</label>
-      <div class="">date input</div>
+      <datetime-input datetime.bind="job.closingDate"></datetime-input>
     </div>
 
     <div class="mb-2">

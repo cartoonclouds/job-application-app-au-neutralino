@@ -1,11 +1,9 @@
 import "select2";
-import "select2/dist/css/select2.min.css";
 
 import { bindable, BindingMode, inject } from "aurelia";
 
 import { PropertyNameOrFunction } from "../../../custom_typings/common";
 import { Utility } from "../../../utilities/common";
-import { ObjectUtility } from "../../../utilities/object-utility";
 
 /**
  *
@@ -54,6 +52,8 @@ export class SelectDropdown {
         width: "100%",
         disabled: this.disabled,
         data: this.selectData,
+        theme: "bootstrap-5",
+        dropdownParent: $(`#${this.name}`).parent(),
       },
       this.options
     );
@@ -78,7 +78,7 @@ export class SelectDropdown {
     this.init();
   }
 
-  protected select2OptionsChanged() {
+  protected optionsChanged() {
     this.init();
   }
 
