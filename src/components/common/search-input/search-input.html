@@ -7,7 +7,7 @@
 
   <input id="${inputId}" type="search" readonly.bind="readonly" disabled.bind="disabled"
     placeholder="${placeholderText}"
-    class="input-search search form-control form-control-sm ${showPrefixIcon ? 'show-prefix-icon' : ''} ${showInput ? 'visible' : ''}"
+    class="input-search search form-control ${showPrefixIcon ? 'show-prefix-icon' : ''} ${showInput ? 'visible' : ''}"
     value.bind="value & debounce:500" ref="input" />
   <button if.bind="value" class="search-icon search-clear" click.trigger="clearSearch($event)">
     <i class="fa fa-times"></i>

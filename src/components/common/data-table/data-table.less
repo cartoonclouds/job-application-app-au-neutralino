@@ -1,33 +1,32 @@
-:global {
-  data-table {
-    display: block;
-    overflow: auto;
+data-table {
+  display: block;
+  overflow: auto;
 
-    table {
-      width: 100%;
-      table-layout: fixed;
-      background-color: transparent;
+  table {
+    width: 100%;
+    table-layout: fixed;
+    background-color: transparent;
 
-      tr {
-        &.selected {
-          background-color: rgb(170, 169, 169);
-          color: rgb(48, 48, 48);
+    tr {
+      &.selected {
+        background-color: rgb(170, 169, 169);
+        color: rgb(48, 48, 48);
+      }
+
+      &.empty-row {
+        // color: var(--foreground--text--secondary);
+        font-style: italic;
+
+        &:not(:first-of-type) {
+          display: none;
         }
+      }
 
-        &.empty-row {
-          // color: var(--foreground--text--secondary);
-          font-style: italic;
-
-          &:not(:first-of-type) {
-            display: none;
-          }
-        }
-
-        th {
-          &.actions {
-            width: 100px;
-            text-align: center;
-          }
+      th {
+        &.actions {
+          width: 100px;
+          text-align: center;
+          font-size: 1.25em;
         }
       }
     }

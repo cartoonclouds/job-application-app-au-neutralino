@@ -3,9 +3,11 @@
 <import from="./components/tabs/summary-tab/summary-tab"></import>
 
 <!-- Sortable http://jqueryui.com/sortable/ -->
+<nav>
+  <tabs tabs.bind="tabService.tabs()"></tabs>
+</nav>
 
 <main class="p-0">
-  <tabs tabs.bind="tabService.tabs()"></tabs>
   <!-- <div class="status-bar">status bar</div> -->
   <!-- <div class="tab-sections"> -->
   <tab-section repeat.for="tab of tabService.tabs()" selected.bind="tab.selected" section.bind="tab.id"

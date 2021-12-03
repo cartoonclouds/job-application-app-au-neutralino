@@ -6,6 +6,7 @@ interface ITabContentOptions {
 export class TabHeader {
   label: string;
   tooltip?: string;
+  class?: string;
   disabled: boolean = false;
   closeable: boolean = true;
   moveable: boolean = true;
@@ -16,6 +17,7 @@ export class TabHeader {
 
       this.label = options.label;
       this.tooltip = options.tooltip || this.label;
+      this.class = options.class;
       this.disabled = options.disabled;
       this.closeable = options.closeable;
       this.moveable = options.moveable;

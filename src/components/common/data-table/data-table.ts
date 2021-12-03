@@ -1,16 +1,10 @@
-import {
-  bindable,
-  BindingMode,
-  EventAggregator,
-  inject,
-  ISignaler,
-} from "aurelia";
+import { bindable, BindingMode, inject } from "aurelia";
+import { ISignaler } from "@aurelia/runtime-html";
 import * as _ from "underscore";
 
 import { FilterValueConverter } from "../../../resources/value-converters/array";
 import { ArrayUtility } from "../../../utilities/array-utility";
 
-@inject()
 export class DataTableHeader {
   public displayName: string = "";
   public class: string = "";
@@ -46,7 +40,8 @@ export class DataTableFilter {
   ) {}
 }
 
-@inject()
+// @customElement({name:'parent-ce'
+@inject(ISignaler)
 export class DataTable {
   @bindable({ mode: BindingMode.toView }) dataModel: any[];
   @bindable({ mode: BindingMode.toView }) tableHeaders: DataTableHeader[];
@@ -57,7 +52,7 @@ export class DataTable {
   @bindable({ mode: BindingMode.oneTime }) onDblClick = (i, event?) => true;
 
   @bindable({ mode: BindingMode.twoWay }) sortAscending: boolean = true;
-  @bindable({ mode: BindingMode.toView }) sortingHeader: DataTableHeader;
+  @bindable({ mode: BindingMode.twoWay }) sortingHeader: DataTableHeader;
 
   @bindable({ mode: BindingMode.twoWay }) search: string = "";
   @bindable({ mode: BindingMode.oneTime }) searchFunction;
@@ -74,11 +69,7 @@ export class DataTable {
   public table: HTMLTableElement;
   public wrapper: HTMLDivElement;
 
-  constructor(
-    private readonly element: Element,
-    private readonly eventAggregator: EventAggregator,
-    private readonly filterValueConverter: FilterValueConverter // @ISignaler private readonly signaler: ISignaler
-  ) {}
+  constructor(@ISignaler private readonly signaler: ISignaler) {}
 
   public binding() {
     this.headersChanged([], this.tableHeaders);
@@ -128,15 +119,13 @@ export class DataTable {
   }
 
   public dataModelChanged(newValue, oldValue) {
-    // this.signaler.dispatchSignal("update-search");
+    this.signaler.dispatchSignal("update-search");
   }
 
   public searchChanged(newValue) {
-    console.log("search changed" + newValue, `new value: ${this.search}`);
+    console.log("search changed: " + newValue);
 
-    this.search = newValue;
-
-    // this.signaler.dispatchSignal("update-search");
+    this.signaler.dispatchSignal("update-search");
   }
 
   public scrollTop() {
@@ -155,7 +144,7 @@ export class DataTable {
       this.sortingHeader = newSortingHeader;
     }
 
-    // this.signaler.dispatchSignal("update-search");
+    this.signaler.dispatchSignal("update-search");
   }
 
   public filterOn(rowModel: any) {
@@ -225,10 +214,12 @@ export class DataTable {
    * Rows will first be passed through the filter and search functions.
    */
   protected getTotal(header: DataTableHeader) {
+    const filterValueConverter = new FilterValueConverter();
+
     let displayedDataModel = ArrayUtility.cloneArray(this.getDataModel());
 
     displayedDataModel = <any[]>(
-      this.filterValueConverter.toView(
+      filterValueConverter.toView(
         displayedDataModel,
         this.filterOn.bind(this),
         null
@@ -236,7 +227,7 @@ export class DataTable {
     );
 
     displayedDataModel = <any[]>(
-      this.filterValueConverter.toView(
+      filterValueConverter.toView(
         displayedDataModel,
         this.searchOn.bind(this),
         null
@@ -254,10 +245,10 @@ export class DataTable {
     oldValue: DataTableHeader[],
     nenwValue: DataTableHeader[]
   ) {
-    this.eventAggregator.publish("update-headers");
+    this.signaler.dispatchSignal("update-headers");
   }
 
   private filtersChanged(filters: DataTableFilter[]) {
-    // this.signaler.dispatchSignal("update-search");
+    this.signaler.dispatchSignal("update-search");
   }
 }

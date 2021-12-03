@@ -41,8 +41,10 @@ const dr = dumber({
   // prepend before amd loader.
   // dumber-module-loader is injected automatically by dumber bundler after prepends.
   // Add global vars https://github.com/dumberjs/dumber/commit/36cb1d4
-  // prepend: [],
-  // append: [],
+  //  process.env.NODE_ENV === 'production' && "node_modules/promise-polyfill/dist/polyfill.min.js"
+  // let globals = {};
+  prepend: ["const __DEV__ = true;", "let globals = {__DEV__: true};"],
+  append: ["globals.__DEV__ = true;"],
 
   // Explicit dependencies, can use either "deps" (short name) or "dependencies" (full name).
   // deps: [],
@@ -113,10 +115,10 @@ function buildHtml(src) {
   return gulp
     .src(src)
     .pipe(gulpif(!isProduction && !isTest, plumber()))
-    .pipe(au2({ useCSSModule: true }));
+    .pipe(au2({ useCSSModule: false }));
 }
 
-function buildCss(src) {
+function buildStyle(src) {
   return gulp
     .src(src, { sourcemaps: !isProduction })
     .pipe(gulpif(!isProduction && !isTest, plumber()))
@@ -132,8 +134,8 @@ function buildCss(src) {
         // improve compatibility on svg.
         postcssUrl({ url: "inline", encodeType: "base64" }),
       ])
-    )
-    .pipe(cssModule());
+    );
+  // .pipe(cssModule());
 }
 
 function build() {
@@ -145,7 +147,7 @@ function build() {
     gulp.src("src/**/*.json"),
     buildJs("src/**/*.ts"),
     buildHtml("src/**/*.html"),
-    buildCss("src/**/*.{less,css}")
+    buildStyle("src/**/*.{less,css}")
   )
     // Note we did extra call `dr()` here, this is designed to cater watch mode.
     // dumber here consumes (swallows) all incoming Vinyl files,

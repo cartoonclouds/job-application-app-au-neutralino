@@ -146,7 +146,21 @@ export class SortValueConverter {
   }
 }
 
+import { ISignaler } from "@aurelia/runtime-html";
+import { inject } from "aurelia";
+
+@inject(ISignaler)
 export class FilterValueConverter {
+  // signal = ["update-search"];
+
+  // constructor(@ISignaler private readonly signaler: ISignaler) {
+  //   signaler.addSignalListener("update-search", {
+  //     handleChange() {
+  //       console.log("listening");
+  //     },
+  //   });
+  // }
+
   /**
    * Filters a array/map by the provided property/value pair or an identify function.
    *
@@ -158,6 +172,8 @@ export class FilterValueConverter {
    */
   public toView(array: any[], propertyNameOrFunction, value) {
     let isMap = false;
+
+    console.log("**** FILTER TO VIEW ", propertyNameOrFunction, value);
 
     if (array instanceof Map) {
       isMap = true;

@@ -15,7 +15,8 @@ import { DataTable } from "./components/common/data-table/data-table";
 import { IconMenu } from "./components/common/icon-menu/icon-menu";
 import { SearchInput } from "./components/common/search-input/search-input";
 import { SalaryRange } from "./components/common/salary-range/salary-range";
-import { DatetimeInput } from './components/common/datetime-input/datetime-input';
+import { DatetimeInput } from "./components/common/datetime-input/datetime-input";
+import { RateOfPay } from "./components/common/rate-of-pay/rate-of-pay";
 
 // Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
@@ -23,6 +24,8 @@ import {
   FilterValueConverter,
   SortValueConverter,
 } from "./resources/value-converters/array";
+
+// Register binding behaviors
 
 // Register custom attributes
 import { TooltipCustomAttribute } from "./resources/custom-attributes/tooltip";
@@ -36,6 +39,7 @@ const app = Aurelia.register(
   SearchInput,
   SalaryRange,
   IconMenu,
+  RateOfPay,
   SelectDropdown,
   DataTable,
   DatetimeInput,

@@ -1,27 +1,23 @@
-<import from="./../common/rate-of-pay/rate-of-pay"></import>
-
 <form>
   <fieldset class="p-2 pt-4">
     <legend class="pt-0 fieldset-header">Job Details</legend>
 
     <div class="mb-2">
-      <label for="job-profession" class="form-label form-label-sm text-muted">Profession</label>
+      <label for="job-profession" class="form-label text-muted">Profession</label>
       <select-dropdown name="job-profession" selected.bind="job.profession" models.bind="jobProfessionOptions"
-        disabled.bind="d" show-search="true" placeholder="Select a profession">
+        show-search="true" placeholder="Select a profession">
       </select-dropdown>
     </div>
 
     <div class="row mb-2">
-      <label for="job-employment-type" class="form-label form-label-sm text-muted">Employment
+      <label for="job-employment-type" class="form-label text-muted">Employment
         Type</label>
       <select-dropdown name="job-employment-type" selected.bind="job.employmentType" models.bind="employmentTypeOptions"
         placeholder="Select an employment type"></select-dropdown>
     </div>
 
-    ${job.closingDate.toISOString()}
-
     <div class="row mb-2">
-      <label for="closingDate" class="form-label form-label-sm text-muted">Closing
+      <label for="closingDate" class="form-label text-muted">Closing
         Date</label>
       <datetime-input datetime.bind="job.closingDate"></datetime-input>
     </div>
@@ -39,13 +35,13 @@
 
     <div class="mb-2">
       <label for="jobUrl" class="form-label text-muted">Website</label>
-      <input value.bind="job.website" type="text" class="form-control form-control-sm" id="jobUrl">
+      <input value.bind="job.website" type="text" class="form-control" id="jobUrl">
     </div>
 
 
     <div class="mb-2">
       <label for="jobComments" class="form-label text-muted">Notes</label>
-      <textarea value.bind="job.comments" class="form-control form-control-sm" id="jobComments" rows="3"></textarea>
+      <textarea value.bind="job.comments" class="form-control" id="jobComments" rows="3"></textarea>
     </div>
   </fieldset>
 </form>
