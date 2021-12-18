@@ -17,6 +17,7 @@ import { SearchInput } from "./components/common/search-input/search-input";
 import { SalaryRange } from "./components/common/salary-range/salary-range";
 import { DatetimeInput } from "./components/common/datetime-input/datetime-input";
 import { RateOfPay } from "./components/common/rate-of-pay/rate-of-pay";
+import { Dropdown } from "./components/common/dropdown/dropdown";
 
 // Register value converters
 import { NumberFormatValueConverter } from "./resources/value-converters/number-format";
@@ -41,6 +42,7 @@ const app = Aurelia.register(
   IconMenu,
   RateOfPay,
   SelectDropdown,
+  Dropdown,
   DataTable,
   DatetimeInput,
   NumberFormatValueConverter,

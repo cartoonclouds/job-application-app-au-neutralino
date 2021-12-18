@@ -1,17 +1,13 @@
-import "select2";
-
 import { bindable, BindingMode, inject } from "aurelia";
 
 import { PropertyNameOrFunction } from "../../../custom_typings/common";
 import { Utility } from "../../../utilities/common";
 
 /**
- *
- * @url https://ilikekillnerds.com/2015/08/aurelia-custom-elements-custom-callback-events-tutorial/
- * @url https://github.com/Kla3mus/select24aurelia/blob/master/select2.ts
+ * A simple dropdown
  */
 @inject()
-export class SelectDropdown {
+export class Dropdown {
   @bindable({ mode: BindingMode.toView }) public name: string;
   @bindable({ mode: BindingMode.twoWay }) public models: any[] = [];
 
@@ -19,11 +15,9 @@ export class SelectDropdown {
   @bindable({ mode: BindingMode.oneTime })
   public labelKey?: PropertyNameOrFunction;
 
-  @bindable({ mode: BindingMode.oneTime }) public multiple: boolean = false;
   @bindable({ mode: BindingMode.oneTime }) public showSearch: boolean = false;
   @bindable({ mode: BindingMode.oneTime }) public placeholder: string = "";
   @bindable({ mode: BindingMode.toView }) public disabled: boolean = false;
-  @bindable({ mode: BindingMode.toView }) public options: object = {};
 
   @bindable({ mode: BindingMode.twoWay }) selected: any | any[];
 
@@ -32,65 +26,33 @@ export class SelectDropdown {
 
   constructor(public readonly element: Element) {}
 
-
   public binding() {
     if (this.name == null || this.name === "") {
-      this.name = `select-dropdown-${SelectDropdown.uniqueId++}`;
+      this.name = `dropdown-${Dropdown.uniqueId++}`;
     }
   }
 
   protected attached() {
-    this.$select = $(this.element).find("select");
+    // this.$select = $(this.element).find("select");
 
     this.init();
   }
 
   protected detached() {
     // release memory
-    if (this.$select?.select2()) {
-      this.$select.off("select2:select");
-      this.$select.select2("destroy");
-      this.$select = null;
-    }
+    // if (this.$select?.select2()) {
+    //   this.$select.off("select2:select");
+    //   this.$select.select2("destroy");
+    //   this.$select = null;
+    // }
   }
 
-
-  // https://select2.org/searching#multi-select
-  // https://github.com/select2/select2/issues/4797
   private init() {
-    this.$select.select2(this.select2Options);
-
-    this.$select.on(
-      "select2:select",
-      (event) => (this.selected = (event.params.data as any).model)
-    );
-  }
-
-  protected get select2Options() {
-    return Object.assign(
-      {},
-      {
-        minimumResultsForSearch: this.showSearch ? undefined : -1,
-        placeholder: this.placeholder,
-        width: "100%",
-        disabled: this.disabled,
-        data: this.selectData,
-        theme: "bootstrap-5",
-        dropdownParent: $(`#${this.name}`).parent(),
-      },
-      this.options
-    );
-  }
-
-  public get selectData() {
-    return this.models.map((m) => {
-      return {
-        id: this.getValue(m),
-        text: this.getLabel(m),
-        selected: this.isSelected(m),
-        model: m,
-      };
-    });
+    // this.$select.select2(this.select2Options);
+    // this.$select.on(
+    //   "select2:select",
+    //   (event) => (this.selected = (event.params.data as any).model)
+    // );
   }
 
   protected modelsChanged() {
@@ -100,11 +62,6 @@ export class SelectDropdown {
   protected disabledChanged() {
     this.init();
   }
-
-  protected optionsChanged() {
-    this.init();
-  }
-
 
   public getValue(item: any) {
     return this.getValueFromKey(item, this.key);

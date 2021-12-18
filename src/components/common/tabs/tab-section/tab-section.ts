@@ -1,6 +1,7 @@
-import { bindable, BindingMode, inject } from "aurelia";
+import { bindable, BindingMode, containerless, inject } from "aurelia";
 
 @inject()
+@containerless
 export class TabSection {
   @bindable section: string;
   @bindable viewModel: any;

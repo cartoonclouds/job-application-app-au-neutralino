@@ -8,7 +8,7 @@
         <tr>
           <th repeat.for="header of tableHeaders" class="${header.class}">
             <au-slot name="header" expose.bind="{ header, $event, $odd, $index }">
-              <a class="no-decorate" href="#">
+              <a class="no-decorate" href="#" click.trigger="sortOn(header)">
                 ${header.displayName}
 
                 <sort-icon if.bind="header.isSortable" sorting.bind="header == sortingHeader"

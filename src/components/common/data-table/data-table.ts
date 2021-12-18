@@ -40,7 +40,6 @@ export class DataTableFilter {
   ) {}
 }
 
-// @customElement({name:'parent-ce'
 @inject(ISignaler)
 export class DataTable {
   @bindable({ mode: BindingMode.toView }) dataModel: any[];
